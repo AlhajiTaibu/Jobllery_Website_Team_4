@@ -40,12 +40,18 @@
                                                     <tbody>
                                                         <tr>
                                                         <?php
+                                                         //prepare query to retreive freelancer from users table and order alphabetically
                                                         $query="SELECT * FROM users WHERE user_role='freelancer' ORDER BY username ASC";
+                                                        
+                                                        //assign variable with mysqli query result
                                                         $select_users=mysqli_query($connection,$query);
-                                                        confirmQuery($select_users);
-
+                                                        
+                                                        confirmQuery($select_users);        //Validation of mysqli query
+                                                        
+                                                        //Looping through result
                                                         while($row=mysqli_fetch_assoc($select_users)){
-                                                        $id =$row['id'];
+                                                        
+                                                        $id =$row['id'];                     //assignment of variable
                                                         $username=$row['username'];
                                                        
                                                             ?>
@@ -58,7 +64,8 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                         <?php     }
+                                                         <?php     
+                                                            }//end of while loop
                                     
                                                         ?>
                                                     </tbody>
@@ -67,17 +74,27 @@
                                         </div>
                                     </div>
                                  <?php
+                                    
+                                    //if a user is selected from chat log grab its id and run the code block below
                                     if(isset($_GET['p_id'])){
-                                        $active_chat_user_id=$_GET['p_id'];
                                         
+                                        $active_chat_user_id=$_GET['p_id'];             //assign the got id to a variable
+                                        
+                                        //prepare a query to select the user that bears the set id
                                         $query="SELECT * FROM users WHERE id= $active_chat_user_id";
+                                        
+                                        //assign variable with mysqli query result
                                         $select_active_user=mysqli_query($connection,$query);
-                                        confirmQuery($select_active_user);
+                                        
+                                        confirmQuery($select_active_user);               //Validation of mysqli query
+                                        
+                                          //Looping through result
                                         while($row=mysqli_fetch_assoc($select_active_user)){
-                                            $active_id = $row['id'];
+                                            
+                                            $active_id = $row['id'];                    //assignment of variable
                                             $active_username= $row['username'];
-                                        }
-                                    }else{
+                                        }//end of while loop
+                                    }else{// if the user id isn't set, assign the variables below to empty string
                                         $active_id="";
                                         $active_username="";
                                     }
@@ -107,18 +124,23 @@
                                         </div>
                                     </div>
                     <?php
+                                    
+                        //When the send button is pressed run the code block below            
                         if(isset($_POST['send'])){
                             if(isset($_GET['p_id'])){
-                            $message = trim($_POST['message']);
+                            $message = trim($_POST['message']);                 //Remove whitespace from user input
                             $user_id =$_SESSION['user_id'];
                             
-                            if(empty($message)){
+                            if(empty($message)){                                // checking for empty variables
                                 
                             }else{
-                            
+                            // prepare query to insert message into the chats table
                             $query="INSERT INTO chats(senderId,receiverId,message,timestamp) VALUES('$user_id', '$active_id','$message',now())";
+                            
+                            //assign variable with mysqli query result
                             $send_message=mysqli_query($connection,$query);
-                            confirmQuery($send_message);   
+                            
+                            confirmQuery($send_message);                        //Validation of mysqli query 
                             
                             }
                                 
@@ -139,13 +161,20 @@
                                                 <tbody>
                                                     <tr>
                                                 <?php
-                                                $user_id=$_SESSION['user_id'];
+                                                
+                                                $user_id=$_SESSION['user_id'];          //assignment of variable
+                                                
+                                                //prepare query to retreive message from chats table based on some conditions 
                                                 $query="SELECT * FROM chats WHERE senderId= '$active_id' AND receiverId='$user_id' ORDER BY timestamp ASC "; 
+                                                
+                                                //assign variable with mysqli query result
                                                 $retreive_message=mysqli_query($connection,$query);
-                                                confirmQuery($retreive_message);
+                                                
+                                                confirmQuery($retreive_message);        //Validation of mysqli query
 
-                                                while($row=mysqli_fetch_assoc($retreive_message)){
-                                                $message=$row['message'];
+                                                while($row=mysqli_fetch_assoc($retreive_message)){   //Looping through result
+                                                
+                                                $message=$row['message'];               //assignment of variable
                                                 $time=$row['timestamp'];
                                                 ?>
                                                         <td>
@@ -164,15 +193,24 @@
                                                         <td></td>
                                                     </tr>
                                                 <?php
-                                                    }?>
-                                               <?php
-                                                   $user_id=$_SESSION['user_id'];
-                                                $query="SELECT * FROM chats WHERE senderId= '$user_id' AND receiverId='$active_id' ORDER BY timestamp ASC "; 
-                                                $retreive_message=mysqli_query($connection,$query);
-                                                confirmQuery($retreive_message);
+                                                    }//end of while loop
                                                     
-                                                    while($row=mysqli_fetch_assoc($retreive_message)){
-                                                        $message=$row['message'];
+                                                    ?>
+                                               <?php
+                                                
+                                                $user_id=$_SESSION['user_id'];              //assignment of variable
+                                                
+                                                //prepare query to retreive message from chats table based on some conditions
+                                                $query="SELECT * FROM chats WHERE senderId= '$user_id' AND receiverId='$active_id' ORDER BY timestamp ASC "; 
+                                                
+                                                //assign variable with mysqli query result
+                                                $retreive_message=mysqli_query($connection,$query);
+                                                
+                                                confirmQuery($retreive_message);            //Validation of mysqli query
+                                                    
+                                                while($row=mysqli_fetch_assoc($retreive_message)){  //Looping through result
+                                                       
+                                                        $message=$row['message'];           //assignment of variable
                                                         $time=$row['timestamp'];
                                                      ?>  
                                                     <tr>
@@ -191,39 +229,9 @@
                                                         </td>
                                                     </tr>
                                                       <?php
-                                                    }?>
-<!--
-                                                    <tr>
-                                                        <td></td>
-                                                        <td>
-                                                            <div class="col">
-                                                                <div class="form-row">
-                                                                    <div class="col col-lg-10" id="chat-sender">
-                                                                        <h6 class="text-right">12/03/2020, 08:01am</h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row" id="chat-sender-btn">
-                                                                    <div class="col" id="chat-send"><button class="btn btn-secondary btn-sm text-left" id="chat-body-btn" type="button">Hello, how may i help you</button></div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td>
-                                                            <div class="col">
-                                                                <div class="form-row">
-                                                                    <div class="col col-lg-10" id="chat-sender">
-                                                                        <h6 class="text-right">12/03/2020, 08:01am</h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row" id="chat-sender-btn">
-                                                                    <div class="col" id="chat-send"><button class="btn btn-secondary btn-sm text-left" id="chat-body-btn" type="button">Hello, how may i help you</button></div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
--->
+                                                    }//end of while loop
+                                                    ?>
+
                                                 </tbody>
                                             </table>
                                         </div>
