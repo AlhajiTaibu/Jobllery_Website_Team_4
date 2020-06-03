@@ -1,0 +1,22 @@
+<svg id="Jobllery_Logo" data-name="Jobllery Logo" xmlns="http://www.w3.org/2000/svg" width="1201" height="305" viewBox="0 0 1201 305">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 60px;
+        font-weight: 300;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #00d820;
+        font-family: "Open Sans";
+      }
+
+      .cls-2 {
+        font-size: 300px;
+        font-weight: 800;
+      }
+    </style>
+  </defs>
+  <text id="Do_More." data-name="Do More." class="cls-1" x="769" y="304">Do More.</text>
+  <text id="jobllery" class="cls-2" x="16" y="233">jobllery</text>
+</svg>

@@ -1,0 +1,572 @@
+.container-fluid.navigation {
+  margin-top: 100px;
+  margin-left: 200px;
+}
+
+.contact-list {
+  border-top: none !important;
+}
+
+#contact-list {
+  height: 447px;
+}
+
+.container-fluid.profile {
+  margin-top: 100px;
+  margin-left: 230px;
+  padding-right: 228px;
+}
+
+#index-card-body {
+  text-align: right !important;
+}
+
+.nav-img {
+  width: 100px;
+}
+
+#content {
+  background-color: #f5f5f5;
+}
+
+.text-dark.mb-0 {
+  color: white;
+}
+
+.nav-link:active, .nav-item:focus {
+  background-color: #f5f5f5;
+}
+
+.navbar.navbar-dark.align-items-start.sidebar.sidebar-dark.accordion.bg-gradient-success.p-0 {
+  background-color: #2c435b!important;
+}
+
+#sidebar {
+  background: #2c435b;
+}
+
+.fas.fa-bars, .fa fa-caret-down {
+  color: #393939 !important;
+  font-size: larger;
+}
+
+.icon.ion-android-delete.trash {
+  background: red;
+  color: white;
+  font-size: 30px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.container {
+  background: white;
+}
+
+.job-image-logo {
+  width: initial;
+}
+
+.job-applied {
+  background-color: white;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  margin-bottom: 30px;
+  margin-left: 40px;
+  margin-right: auto;
+}
+
+.row.jobs-row {
+  margin-left: 40px;
+  margin-right: -60px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.job-logo {
+  height: 120px;
+  width: 120px;
+  margin: 10px;
+}
+
+.job-logo-text {
+  margin: 20px;
+  padding-top: 8px;
+}
+
+.text-left.h3-text {
+  color: #04ac71;
+  margin-left: 55px;
+}
+
+h3, h4, h6, th, td {
+  color: #393939;
+}
+
+.heading-style {
+  margin-left: 40px;
+}
+
+.header {
+  margin-left: 34px;
+  padding-top: 20px;
+}
+
+.text-dark.mb-0 {
+  margin-left: 40px;
+}
+
+.logo-background {
+  background-color: #f5f5f5!important;
+  margin: 10px;
+  border-bottom: 15px solid white;
+}
+
+.col.col-md-2.col-xl-2.col-md-3 {
+  background-color: white;
+}
+
+#sidebar-color {
+  background: #2c435b !important;
+}
+
+ul {
+  list-style: none;
+}
+
+.profile-container {
+  background: white;
+  padding-bottom: 40px;
+  margin-bottom: 30px;
+}
+
+#profile-picture {
+  margin-left: 40px;
+  padding-bottom: 10px;
+}
+
+.img-fluid.figure-img {
+  width: 150px;
+}
+
+.figure-caption {
+  text-align: left;
+  padding-bottom: 10px;
+  font-size: smaller;
+}
+
+.col-lg-2 {
+  padding-left: 0px;
+}
+
+.profile-button {
+  padding-top: 28px;
+}
+
+#button {
+  background-color: #00d820;
+  border-radius: 0px;
+  border-color: #00d820;
+}
+
+#forms {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.sidebar-dark .nav-item .nav-link.active, .sidebar-dark .nav-item .nav-link.active i, .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:active i, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:focus i, .sidebar-dark .nav-item .nav-link:hover, .sidebar-dark .nav-item .nav-link:hover i {
+  color: #fff;
+  background-color: #00d820;
+}
+
+input, select, textarea, th {
+  border-color: #00d820 !important;
+  border-radius: 0px !important;
+  background-color: rgb(240,241,241) !important;
+}
+
+label, .figure-caption {
+  color: #393939;
+}
+
+#form-adjust {
+  margin-left: 32px;
+  margin-right: 40px;
+}
+
+.form-row.checkbox {
+  margin-left: 20px;
+}
+
+.rounded-circle.chat-img {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 0px;
+  margin-right: -60px;
+}
+
+.form-control.input-btn {
+  border-color: #00d820 !important;
+}
+
+.fa.fa-search.search-icon {
+  position: relative;
+  color: #00d820;
+}
+
+#search-btn {
+  height: 38px;
+  border-radius: 0px;
+  padding: 10px;
+}
+
+.fa.fa-close {
+  border: 1px solid #00d820;
+  color: white;
+  background: #00d820;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+}
+
+.close-logo {
+  margin-top: 40px;
+  margin-right: 15px;
+}
+
+.sort {
+  float: right;
+}
+
+.col.sort-col {
+  padding-right: 0px;
+}
+
+#row-style {
+  margin-bottom: 40px;
+}
+
+#img-div {
+  background-image: url(../../assets/img/avatars/avatar1.jpeg);
+  padding-left: 0px!important;
+  width: 150px;
+}
+
+.table.table-bordered {
+  border: 1px solid #00d820;
+  border-bottom: 2px solid #00d820;
+}
+
+.chat-box {
+  border: 1px solid #04ac71;
+  margin-left: -12px;
+  margin-right: -12px;
+  height: 80px;
+}
+
+.chat-header {
+  padding-top: 30px!important;
+}
+
+.table-row {
+  background: rgb(240,241,241);
+  border-bottom: 10px solid white;
+}
+
+.table-data {
+  padding-left: 5px!important;
+}
+
+/* CSS for Messages */
+
+.header-div {
+  margin-bottom: 20px;
+}
+
+#message-sidebar {
+  background-color: #2c455b;
+  padding: 0px;
+  height: 527px;
+  max-height: 527px;
+}
+
+.row.chat-btn {
+  margin-left: 5px;
+  margin-right: 0px;
+}
+
+#chat-image {
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+
+#chat-name {
+  padding-top: 30px;
+  padding-left: 0px;
+}
+
+#send-message {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.row.chat-system {
+  margin-left: 15px;
+  margin-right: 20px;
+  height: 427px;
+}
+
+.chat-body {
+  background: #f5f5f5;
+  margin-left: -10px;
+  margin-right: -12px;
+}
+
+.chat-text {
+  color: #00d820;
+}
+
+#chat-box {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#chat-body-image {
+  width: 30px;
+}
+
+#chat-body-logo {
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+#chat-body-details {
+  padding-top: 25px;
+  padding-left: 0px;
+}
+
+#chat-body-msg {
+  padding-left: 60px;
+  padding-bottom: 10px;
+}
+
+#message-table {
+  max-height: 400px;
+  height: 400px;
+}
+
+#chat-body-btn {
+  border-radius: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: #00d820;
+}
+
+#chat-sender {
+  padding-right: 10px;
+  margin-left: 40px;
+}
+
+#chat-sender-btn {
+  float: right;
+}
+
+#chat-send {
+  padding-bottom: 10px;
+}
+
+.fa.fa-long-arrow-right {
+  width: 40px;
+  font-size: 30px;
+}
+
+#send-textbox {
+  height: 47.5px;
+  margin-left: 2.5px;
+  background: white !important;
+}
+
+#message-search {
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+}
+
+#search-input {
+  border: none;
+  background-color: white !important;
+}
+
+#search-btn-btn {
+  background: white;
+  border-radius: 0px;
+  border-left: none;
+  border-bottom: none;
+  border-top: none;
+}
+
+#search-icon {
+  color: rgb(68,197,158);
+  font-size: larger;
+}
+
+.text-link {
+  color: white;
+}
+
+#text-link {
+  padding-left: 0px;
+}
+
+#chat-panel {
+  margin-bottom: 5px;
+}
+
+.btn.btn-success.send-btn {
+  border-radius: 0px;
+  background: #2c435b;
+  margin-right: 4px;
+}
+
+.text-right.delete-chat {
+  color: red;
+}
+
+/* CSS for Following Employees */
+
+.follow-tbody {
+  padding-right: 40px !important;
+  padding-left: 40px;
+}
+
+#follow-employers-btn {
+  float: right;
+  padding-top: 30px;
+  padding-right: 10px;
+}
+
+#follow-btn {
+  border-radius: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  background-color: #00d820;
+}
+
+#job-open {
+  margin-top: 20px;
+}
+
+.job-open {
+  text-align: center;
+  font-size: smaller;
+}
+
+/* CSS for the payments navigation */
+
+.card-header {
+  margin-bottom: 0;
+  background-color: #f1ece9;
+  border-radius: 0px !important;
+  padding: 0px;
+}
+
+#payment-nav {
+  border-top: 5px solid #00d820;
+  background: white;
+  border-bottom: 1px solid white;
+}
+
+#payment-card {
+  border: 1px solid #00d820;
+  border-radius: 0px;
+  margin: 20px;
+}
+
+.payment-table {
+  padding-left: 0px!important;
+  padding-right: 0px!important;
+}
+
+.table.payment-header {
+  background: #f5f5f5;
+}
+
+.payment-nav-inactive {
+  padding-top: 0px;
+}
+
+#payment-nav-item {
+  border-bottom: 1px solid #00d820;
+  margin-top: 0px;
+}
+
+.payment-nav-item {
+  border-left: 1px solid #00d820;
+}
+
+#payment-card-body {
+  padding: 0px;
+}
+
+#payment-btn {
+  float: right;
+  background-color: #00d820;
+  border-radius: 0px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+a:hover {
+  color: #2c435b;
+  text-decoration: none;
+}
+
+.table td, .table th {
+  vertical-align: top;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-top: 1px solid white;
+}
+
+.icon.ion-android-send {
+  font-size: 23px;
+}
+
+.border-bottom-success {
+  border-bottom: .25rem solid #393939!important;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled).active:focus, .btn-outline-success:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-success.dropdown-toggle:focus {
+  box-shadow: 0 0 0 .2rem #00d820;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled).active, .btn-outline-success:not(:disabled):not(.disabled):active, .show > .btn-outline-success.dropdown-toggle {
+  color: #fff;
+  background-color: #00d820;
+  border-color: #00d820;
+}
+
+.card-img.w-100.d-block.img-background {
+  height: 600px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 192px;
+  margin-left: 26px;
+}
+
+.col-xl-Infinity.icon {
+  padding-left: 10px;
+  padding-right: 15px;
+}
+
+.nav-link {
+  display: block;
+  padding: 0px;
+}
+
