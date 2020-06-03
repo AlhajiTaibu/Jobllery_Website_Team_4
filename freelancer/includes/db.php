@@ -1,4 +1,7 @@
 <?php
+
+//Setting up the database connection
+
 $db_host="localhost";
 $db_user="root";
 $db_pass="0240624914";

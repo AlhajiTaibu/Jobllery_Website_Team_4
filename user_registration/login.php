@@ -15,13 +15,17 @@
                                 <div class="p-5">
                                     <div class="text-center">
                 <?php
-                       if(isset($_POST['login'])){
-                           $email=trim($_POST['email']);
+                          //When the login button is pressed a block of code runs
+                          if(isset($_POST['login'])){
+                              
+                           $email=trim($_POST['email']);            // Removing whitespaces from user input
                            $password=trim($_POST['password']);
-                           if(empty($email)&&empty($password)){
+                           
+                            if(empty($email)&&empty($password)){    // checking for empty variables
                                 
                            }else{
-                            login_user($email,$password);   
+                                
+                            login_user($email,$password);           // invocation of the login user method
                            }
                            
                          

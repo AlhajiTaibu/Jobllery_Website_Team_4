@@ -24,8 +24,10 @@
                 <div class="profile-container">
                     <h3 class="header"><strong>Profile</strong></h3>
                      <?php
+                        //When the save profile button is pressed a block of code runs
                         if(isset($_POST['submit'])){
                             
+                            // Removing whitespace
                             $firstname = trim($_POST['firstname']);
                             $lastname = trim($_POST['lastname']);
                             $address = trim($_POST['address']);
@@ -41,44 +43,48 @@
                             $profile_image = $_FILES['image']['name'];
                             $profile_temp_image = $_FILES['image']['tmp_name'];
                             
-
+                            //move the file from a temproary location to the designated variable
                             move_uploaded_file($profile_temp_image, "assets/img/dogs/$profile_image");
-
+                            
+                            //creation of associated array
                             $error=['firstname'=>'','lastname'=>'','address'=>'','gender'=>'','qualification'=>'','description'=>''];
             
-            
+                            //assign a string to the error array if the firstname field is empty
                             if($firstname==''){
                             $error['firstname']='Firstname field cannot be empty';
                             }  
-
+                            //assign a string to the error array if the lastname field is empty
                             if($lastname==''){
                             $error['lastname']='Lastname field cannot be empty';
                             }   
-                            
+                            //assign a string to the error array if the address field is empty
                             if($address==''){
                             $error['address']='Address field cannot be empty';
                             }
-
+                            //assign a string to the error array if the qualification field is empty
                             if($qualification==''){
                             $error['qualification']="Please choose your qualification";
                             }   
-                            
+                            //assign a string to the error array if the gender field is empty
                             if($gender==''){
                             $error['gender']= "Please choose your gender";
                             } 
-                            
+                            //assign a string to the error array if the description field is empty
                             if($description==''){
                             $error['description']="Description field is required";
                             }  
-
+                            //Loop through the error array
                             foreach($error as $key => $value ){
                             if(empty($value)){
                             unset($error[$key]); 
                             }
                             } 
+                            
+                            //if the error array is empty allow the code below to run
                             if(empty($error)){
-
-                            updateProfile($firstname,$lastname,$address,$contact_number,$experience,$dob,$job_title,$gender,$qualification, $description, $link, $tags,$profile_image); 
+                            
+                            //invocation of updateClientProfile method
+                             updateProfile($firstname,$lastname,$address,$contact_number,$experience,$dob,$job_title,$gender,$qualification, $description, $link, $tags,$profile_image); 
                            
                                 
                             
@@ -96,10 +102,12 @@
                             <div class="col-md-6 offset-md-0" id="forms">
                                 <div class="form-group"><label>First Name</label>
                                 <input class="form-control" type="text" name="firstname">
+                                <!--  if the first name field is empty alert user-->
                                 <p class="text small text-danger"><?php echo isset($error['firstname']) ? $error['firstname']:''; ?></p>
                                 </div>
                                 <div class="form-group"><label>Address</label>
                                 <input class="form-control" type="text" name="address">
+                                <!--  if the address field is empty alert user-->
                                 <p class="text small text-danger"><?php echo isset($error['address']) ? $error['address']:''; ?></p>
                                 </div>
                                 <div class="form-group"><label>Phone Number</label>
@@ -112,6 +120,7 @@
                             <div class="col-md-6 offset-md-0" id="forms">
                                 <div class="form-group"><label>Last Name</label>
                                 <input class="form-control" type="text" name="lastname">
+                                <!--  if the last name field is empty alert user-->
                                 <p class="text small text-danger"><?php echo isset($error['lastname']) ? $error['lastname']:''; ?></p>
                                 </div>
                                 <div class="form-group"><label>Date of Birth</label>
@@ -129,6 +138,7 @@
                                 <option value="other">Other</option>
                                 </select>
                                 </label>
+                                <!--  if the gender field is empty alert user-->
                                 <p class="text small text-danger"><?php echo isset($error['gender']) ? $error['gender']:''; ?></p>
                                 </div>
                                 </div>
@@ -155,6 +165,7 @@
                                     <option value="degree">Bachelor's Degree</option>
                                     <option value="high_school">High School Certificate</option>
                                     </select>
+                                    <!--  if the qualification field is empty alert user-->
                                     <p class="text small text-danger"><?php echo isset($error['qualification']) ? $error['qualification']:''; ?></p>
                                     </div>
                                 </div>
@@ -167,6 +178,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                     <textarea class="form-control" name="description"></textarea>
+                                    <!--  if the description field is empty alert user-->
                                     <p class="text small text-danger"><?php echo isset($error['description']) ? $error['description']:''; ?></p>
                                     </div>
                                 </div>

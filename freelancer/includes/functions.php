@@ -1,51 +1,69 @@
 <?php
+/***
+This file contains php methods for execution of specific actions
+***
+*/
 
+
+// Method for checking the correctness of mysqli_query
 function confirmQuery($result){
-    global $connection;
+    
+    global $connection;     // declaring the $connection variable global
+    
     if(!$result){
         die("QUERY FAILED".mysqli_error($connection));
     }
+    
 }
 
+
+// Method for checking for existence of an email in the database 
 function email_exists($email){
-    global $connection;
     
-    $query="SELECT email FROM users WHERE email='$email'";
-    $result=mysqli_query($connection,$query);
+    global $connection;        // declaring the $connection variable global
     
-    $count= mysqli_num_rows($result);
+    $query="SELECT email FROM users WHERE email='$email'";  // preparing mysqli query to select data from database
+    $result=mysqli_query($connection,$query);               // setting a variable to mysqli query 
     
-    if($count>0){
+    $count= mysqli_num_rows($result);               // counting the number of rows of mysqli result
+    
+    if($count>0){                               // checking whether the no of rows is greater than 0 if yes return else false
         return true;
     }else{
         return false;
     }
 }
 
+
+// Method for registering users based on their choosen role into the system
 function register_user($username,$email,$password,$user_role){
-    global $connection;
     
-    if(!empty($username)&&!empty($email)&&!empty($password)&&!empty($user_role)){
+    global $connection;         // declaring the $connection variable global
+    
+    if(!empty($username)&&!empty($email)&&!empty($password)&&!empty($user_role)){   //checking parameters for empty string
         
-        $username=mysqli_real_escape_string($connection,$username);
+        $username=mysqli_real_escape_string($connection,$username);      // cleaning of parameters to prevent mysql injection
         $email=mysqli_real_escape_string($connection,$email);
         $password=mysqli_real_escape_string($connection,$password);
         $salt="$2y$10$";
         $hash="iaminlovewithphpoop123";
         $hashSalt=$salt.$hash;
         
-        $password=crypt($password,$hashSalt);
+        $password=crypt($password,$hashSalt);                       // encryption of user password
         
-        $token=md5(rand('10000','99999'));
-        $email_confirmation_status ='inactive';
-        
-        $query="INSERT INTO users(username,email,password,user_role,email_confirmation_status,token) VALUES('$username','$email','$password','$user_role','$email_confirmation_status','$token')";
-        $register_user=mysqli_query($connection,$query);
-        
-        confirmQuery($register_user);
+        $token=md5(rand('10000','99999'));                          // generation of random number
        
-        if( $register_user==true){
-        date_default_timezone_set('Etc/UTC');
+        $email_confirmation_status ='inactive';                     // initialization of a variable
+        
+        //preparing mysqli query for inserting into the database
+        $query="INSERT INTO users(username,email,password,user_role,email_confirmation_status,token) VALUES('$username','$email','$password','$user_role','$email_confirmation_status','$token')";
+        
+        $register_user=mysqli_query($connection,$query);            // setting a variable to mysqli query 
+        
+        confirmQuery($register_user);                               // validation of mysqli query
+       
+        if($register_user==true){                                  // checking query result
+        date_default_timezone_set('Etc/UTC');                      // seting the default timezone
 
 
         //Create a new PHPMailer instance
@@ -132,96 +150,110 @@ function register_user($username,$email,$password,$user_role){
     }
 }
 
+
+//Method for signing in users into the system
 function login_user($email,$password){
     
-    global $connection;
+    global $connection;         // declaring the $connection variable global
     
-    $email=trim($email);
+    $email=trim($email);            // Removing whitespace from parameters
     $password=trim($password);
     
-    $email=mysqli_real_escape_string($connection,$email);
+    $email=mysqli_real_escape_string($connection,$email);          // cleaning of parameters to prevent mysql injection
     $password=mysqli_real_escape_string($connection,$password);
     
+    //preparing mysqli query for retreiving data from database
     $query="SELECT * FROM users WHERE email='$email' AND email_confirmation_status='active'";
-    $select_query=mysqli_query($connection,$query);
     
-    confirmQuery($select_query);
+    $select_query=mysqli_query($connection,$query);                 // setting a variable to mysqli query     
     
-    while($row=mysqli_fetch_assoc($select_query)){
-        $db_username=$row['username'];
+    confirmQuery($select_query);                                    // validation of mysqli query
+    
+    while($row=mysqli_fetch_assoc($select_query)){                  // Looping through results from the database 
+        
+        $db_username=$row['username'];                              // Initialization of varaiable
         $db_email=$row['email'];
         $db_password=$row['password'];
         $db_user_role=$row['user_role'];
         $db_user_id=$row['id'];
     
     
-    $password=crypt($password,$db_password);
+    $password = crypt($password,$db_password);                      // Password decryption
     
-  if($email!==$db_email && $password!==$db_password){
+  if($email!==$db_email && $password!==$db_password){               // Checking for wrong email and password
     
-      echo "<p class='alert alert-danger'>Wrong password and email</p>";
+      echo "<p class='alert alert-danger'>Wrong password and email</p>"; // Alert the user if condition is true 
     
-    }elseif($email==$db_email && $password!==$db_password){
+    }elseif($email==$db_email && $password!==$db_password){         // Checking for correct email and wrong password
       
-      echo "<p class='alert alert-danger'>Wrong password</p>";
+      echo "<p class='alert alert-danger'>Wrong password</p>";      // Alert the user if condition is true 
       
-    }elseif($email!==$db_email && $password===$db_password){
+    }elseif($email!==$db_email && $password===$db_password){        // Checking for wrong email and correct password
       
-      echo "<p class='alert alert-danger'>Wrong email</p>";
+      echo "<p class='alert alert-danger'>Wrong email</p>";         // Alert the user if condition is true
       
     }
 
     
-    
-    if($email==$db_email && $password==$db_password && $db_user_role==='client'){
+    // Checking for correct email, password and client user
+    if($email==$db_email && $password==$db_password && $db_user_role==='client'){ 
    
-    $_SESSION['email'] = $db_email;
+    $_SESSION['email'] = $db_email;                       // Creation of session variables
     $_SESSION['username'] = $db_username;
     $_SESSION['user_role'] = $db_user_role;
     $_SESSION['user_id'] =  $db_user_id;
     
-    header("Location:../client/index.php");
+    header("Location:../client/index.php");              // Redirecting the user to the client dashboard if condition is true
       
-  }
+    }
+        
+     // Checking for correct email, password and freelancer user   
     if($email==$db_email && $password==$db_password && $db_user_role==='freelancer'){
     
-    $_SESSION['email'] = $db_email;
+    $_SESSION['email'] = $db_email;                     // Creation of session variables
     $_SESSION['username'] = $db_username;
     $_SESSION['user_role'] = $db_user_role;
     $_SESSION['user_id'] =  $db_user_id;
     
-    header("Location:../freelancer/index.php");   
+    header("Location:../freelancer/index.php");      // Redirecting the user to the freelancer dashboard if condition is true
   
     }
     }
     
 }
 
+
+//Method for forget password functionality
 function forgetPassword($email){
-    global $connection;
+    
+    global $connection;         // declaring the $connection variable global
    
     
-        if(!empty($email)){
-        $email=mysqli_real_escape_string($connection,$email);
+        if(!empty($email)){       //checking parameters for empty string
         
-        $token = md5(rand('100','555'));
+        $email=mysqli_real_escape_string($connection,$email);       // cleaning of parameter to prevent mysql injection
         
+        $token = md5(rand('100','555'));                            // generation of random number
+        
+        //preparing mysqli query for retreiving data from database
         $query="SELECT * FROM users WHERE email='$email'";
-        $select_user=mysqli_query($connection,$query);
         
-        confirmQuery($select_user);
+        $select_user=mysqli_query($connection,$query);               // setting a variable to mysqli query     
+        
+        confirmQuery($select_user);                                  // validation of mysqli query
          
-        $email_count = mysqli_num_rows($select_user);
+        $email_count = mysqli_num_rows($select_user);                // counting the number of rows of mysqli result
         
             
-        if($email_count==1){
+        if($email_count==1){                                         // checking whether the no of rows is equal to 1
             
-            while($row=mysqli_fetch_assoc($select_user)){
-                $db_id=$row['id'];
+            while($row=mysqli_fetch_assoc($select_user)){            // Looping through results from the database 
+                
+                $db_id=$row['id'];                                   // Initialization of varaiable
                 $db_email=$row['email'];
             }  
             
-        date_default_timezone_set('Etc/UTC');
+        date_default_timezone_set('Etc/UTC');                        // seting the default timezone
 
 
         //Create a new PHPMailer instance
@@ -304,37 +336,49 @@ function forgetPassword($email){
 }
 
 
+// Method for the confirm password functionality
 function confirmPassword($new_password,$repeat_password,$user_id){
-       global $connection;
+       
+        global $connection;         // declaring the $connection variable global
 
-        if(!empty($new_password)&&!empty($repeat_password)){
-        $new_password=mysqli_real_escape_string($connection,$new_password); 
+        if(!empty($new_password)&&!empty($repeat_password)){            //checking parameters for empty string
+        
+        // cleaning of parameter to prevent mysql injections
+        $new_password=mysqli_real_escape_string($connection,$new_password);
         $repeat_password=mysqli_real_escape_string($connection,$repeat_password); 
         
         $salt="$2y$10$";
         $hash="iaminlovewithphpoop123";
         $hashSalt=$salt.$hash;
         
-        $new_password=crypt($new_password,$hashSalt);  
-            
-        $query="SELECT * FROM users WHERE id='$user_id'";
-        $select_old_password_query=mysqli_query($connection,$query);
-        confirmQuery($select_old_password_query);
+        $new_password=crypt($new_password,$hashSalt);                   // encryption of user password
         
-        while($row=mysqli_fetch_assoc($select_old_password_query)){
+        //preparing mysqli query for retreiving data from database   
+        $query="SELECT * FROM users WHERE id='$user_id'";
+        
+        $select_old_password_query=mysqli_query($connection,$query);    // setting a variable to mysqli query
+        
+        confirmQuery($select_old_password_query);                       // validation of mysqli query
+        
+        while($row=mysqli_fetch_assoc($select_old_password_query)){     // Looping through results from the database 
             $db_password=$row['password'];
         }
         
-        if($db_password===$new_password){
-            echo "<h6 class='alert alert-warning'>New password is the same as the old password,please <a href='login.php'>Login here</a></h6>";
-        }elseif($db_password!==$new_password){
+        if($db_password===$new_password){         // Checking for whether the entered password already exist in the database
             
-        $query= "UPDATE users SET password='$new_password' WHERE id = '$user_id'";
-        $reset_password_query = mysqli_query($connection,$query);
-            
-        confirmQuery($reset_password_query);
+            echo "<h6 class='alert alert-warning'>New password is the same as the old password,please <a href='login.php'>Login here</a></h6>";                     // Alert user
         
-              echo "<h6 class='alert alert-success'>Password Reset Successfully</h6>";  
+        // If entered password is different from what exist in the database execute a block of code
+        }elseif($db_password!==$new_password){
+         
+        //preparing mysqli query to insert data into database       
+        $query= "UPDATE users SET password='$new_password' WHERE id = '$user_id'";
+        
+        $reset_password_query = mysqli_query($connection,$query);       // setting a variable to mysqli query
+            
+        confirmQuery($reset_password_query);                            // validation of mysqli query
+        
+            echo "<h6 class='alert alert-success'>Password Reset Successfully</h6>";  // Alert user
           
         
             
@@ -343,11 +387,15 @@ function confirmPassword($new_password,$repeat_password,$user_id){
 }
 
 
+
+// Method for editing freelancer's profile
 function updateProfile($firstname,$lastname,$address,$contact_number,$experience,$dob,$job_title,$gender,$qualification, $description, $link, $tags,$profile_image){
-    global $connection;
+   
+    global $connection;             // declaring the $connection variable global
     
-    if(!empty($firstname)&&!empty($lastname)&&!empty($address)&&!empty($gender)){
+    if(!empty($firstname)&&!empty($lastname)&&!empty($address)&&!empty($gender)){   //checking parameters for empty string
         
+        // cleaning of parameter to prevent mysql injections
         $firstname=mysqli_real_escape_string($connection,$firstname);
         $lastname=mysqli_real_escape_string($connection,$lastname);
         $address=mysqli_real_escape_string($connection,$address);
@@ -362,13 +410,14 @@ function updateProfile($firstname,$lastname,$address,$contact_number,$experience
         $tags=mysqli_real_escape_string($connection,$tags);
         $profile_image=mysqli_real_escape_string($connection,$profile_image);
         
-        
+        //preparing mysqli query for inserting into the database
         $query="INSERT INTO profile(first_name,last_name,address,dob,image,contact_number,experience,gender,qualification,description,url,tags) VALUES('$firstname','$lastname','$address','$dob','$profile_image','$contact_number','$experience','$gender','$qualification','$description','$link','$tags')";
-        $update_profile=mysqli_query($connection,$query);
+       
+        $update_profile=mysqli_query($connection,$query);                   // setting a variable to mysqli query
         
-        confirmQuery($update_profile);
+        confirmQuery($update_profile);                                      // validation of mysqli query
         
-       echo $message="<h6 class='alert alert-success'>Profile updated successfully. Click here to view your profile<a href='#? '>   View Profile</a></h6>";
+       echo $message="<h6 class='alert alert-success'>Profile updated successfully. Click here to view your profile<a href='#? '>   View Profile</a></h6>";                                 // Alert user
     
 }
 
@@ -376,12 +425,14 @@ function updateProfile($firstname,$lastname,$address,$contact_number,$experience
 }
 
 
-
+// Method for editing client's profile
 function updateClientProfile($firstname,$lastname,$address,$contact_number,$dob,$job_title,$gender, $description, $link, $tags,$profile_image){
-    global $connection;
     
-    if(!empty($firstname)&&!empty($lastname)&&!empty($address)&&!empty($gender)){
+    global $connection;             // declaring the $connection variable global
+    
+    if(!empty($firstname)&&!empty($lastname)&&!empty($address)&&!empty($gender)){   //checking parameters for empty string
         
+        // cleaning of parameter to prevent mysql injections
         $firstname=mysqli_real_escape_string($connection,$firstname);
         $lastname=mysqli_real_escape_string($connection,$lastname);
         $address=mysqli_real_escape_string($connection,$address);
@@ -394,13 +445,14 @@ function updateClientProfile($firstname,$lastname,$address,$contact_number,$dob,
         $tags=mysqli_real_escape_string($connection,$tags);
         $profile_image=mysqli_real_escape_string($connection,$profile_image);
         
-        
+        //preparing mysqli query for inserting into the database
         $query="INSERT INTO client(firstname,lastname,address,dob,contact_number,job_title,gender,image,description,url,tags) VALUES('$firstname','$lastname','$address','$dob','$contact_number','$job_title','$gender','$profile_image','$description','$link','$tags')";
-        $update_profile=mysqli_query($connection,$query);
         
-        confirmQuery($update_profile);
+        $update_profile=mysqli_query($connection,$query);                       // setting a variable to mysqli query
         
-       echo $message="<h6 class='alert alert-success'>Profile updated successfully. Click here to view your profile<a href='#? '>   View Profile</a></h6>";
+        confirmQuery($update_profile);                                          // validation of mysqli query
+        
+        echo $message="<h6 class='alert alert-success'>Profile updated successfully. Click here to view your profile<a href='#? '>   View Profile</a></h6>";                                    // Alert user
     
 }
 

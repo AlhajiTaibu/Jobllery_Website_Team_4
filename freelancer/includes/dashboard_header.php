@@ -3,11 +3,11 @@
 <?php include "db.php";?>
 
 <?php
-
+    //If the session is equal to freelancer allow user
     if($_SESSION['user_role']==='freelancer'){
        
     }else{
-        
+        // else redirect user to the login page
          header('Location:../user_registration/login.php');
     }
 
