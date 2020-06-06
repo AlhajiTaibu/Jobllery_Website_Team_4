@@ -461,6 +461,44 @@ function updateClientProfile($firstname,$lastname,$address,$contact_number,$dob,
 
 
 
+// Method for editing freelancer's profile
+function postJob($client_id,$category,$title,$contract,$description,$deadline,$required_skill,$min_salary, $max_salary,$salary_type,$tags,$offered_salary,$duration,$experience,$profile_image,$location){
+   
+    global $connection;             // declaring the $connection variable global
+    
+    if(!empty($title)&&!empty($description)&&!empty($category)&&!empty($tags)&&!empty($client_id)){   //checking parameters for empty string
+        
+        // cleaning of parameter to prevent mysql injections
+        $category=mysqli_real_escape_string($connection,$category);
+        $title=mysqli_real_escape_string($connection,$title);
+        $contract=mysqli_real_escape_string($connection,$contract);
+        $description=mysqli_real_escape_string($connection,$description);
+        $deadline=mysqli_real_escape_string($connection,$deadline);
+        $required_skill=mysqli_real_escape_string($connection,$required_skill);
+        $min_salary=mysqli_real_escape_string($connection,$min_salary);
+        $max_salary=mysqli_real_escape_string($connection,$max_salary);
+        $salary_type=mysqli_real_escape_string($connection,$salary_type);
+        $tags=mysqli_real_escape_string($connection,$tags);
+        $offered_salary=mysqli_real_escape_string($connection,$offered_salary);
+        $duration=mysqli_real_escape_string($connection,$duration);
+        $experience=mysqli_real_escape_string($connection,$experience);
+        $profile_image=mysqli_real_escape_string($connection,$profile_image);
+        $location=mysqli_real_escape_string($connection,$location);
+        
+        //preparing mysqli query for inserting into the database
+        $query="INSERT INTO job_post(client_id,category_id,job_title,contract_type,job_description,application_deadline_date,required_skills,min_salary,max_salary,salary_type,tags,offered_salary,job_duration,experience,image,location) VALUES('$client_id','$category',' $title','$contract','$description','$deadline','$required_skill','$min_salary','$max_salary','$salary_type','$tags','$offered_salary','$duration','$experience','$profile_image','$location')";
+       
+        $post_job=mysqli_query($connection,$query);                   // setting a variable to mysqli query
+        
+        confirmQuery($post_job);                                      // validation of mysqli query
+        
+       echo $message="<h6 class='alert alert-success'>Job submitted successfully. Click here to view your job post<a href='#? '>   View Jobs</a></h6>";                                 // Alert user
+    
+}
+
+
+}
+
 
 
 

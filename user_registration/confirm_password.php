@@ -2,19 +2,11 @@
   <?php include "../freelancer/includes/db.php"; ?>
    <?php include "../freelancer/includes/functions.php"; ?>
   <?php include "includes/navigation.php";?>
-    <div class="container" id="login_container">
-        <div class="row justify-content-center">
-            <div class="col-md-9 col-lg-12 col-xl-10">
-                <div class="card shadow-lg o-hidden border-0 my-5">
-                    <div class="card-body p-0">
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-flex">
-                                <div class="flex-grow-1 bg-password-image" style="background-image: url(assets/img/dogs/forgotten_password_img.jpg)">;"></div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                   
-                        <?php
+<div class="login-wrap customscroll d-flex align-items-center flex-wrap justify-content-center pd-20">
+		<div class="login-box bg-white box-shadow pd-30 border-radius-5">
+<!--			<img src="vendors/images/login-img.png" alt="login" class="login-img">-->
+			<h2 class="text-center mb-30">Create Password</h2>
+			   <?php
                             if(isset($_GET['token'])){
 
                                 if(isset($_GET['c_id'])){
@@ -66,44 +58,44 @@
                             }
 
                             ?>
-                                    <div class="text-center">
-                                        <h4 class="text-dark mb-2">Create a new Password</h4>
-                                        <p class="mb-4"></p>
-                                    </div>
-                                    <form class="user" action="" method="post">
-                                        <div class="form-group">
-                                        <input class="form-control form-control-user" type="password" id="login-input"  placeholder="Please enter a new Password" name="new_password">
-                                        <p class="text small text-danger"><?php 
-                                        if(isset($error['new_password'])){
-                                        echo $error['new_password'];
-                                        }elseif(isset($error['password_len'])){
-                                            echo $error['password_len'];
-                                        }
-                                        ?>
-                                     </p>
-                                        </div>
-                                        <div class="form-group">
-                                           <input class="form-control form-control-user" type="password" id="login-input"  placeholder="Re-enter Password" name="repeat_password">
-                                           <p class="text small text-danger"><?php 
-                                        if(isset($error['repeat_password'])){
-                                        echo $error['repeat_password'];
-                                        }elseif(isset($error['password_len'])){
-                                            echo $error['password_len'];
-                                        }
-                                        ?>
-                                     </p>
-                                           </div>
-                                           <button class="btn btn-primary btn-block text-white btn-user"
-                                            type="submit" name="confirm">Confirm</button></form>
-                                    <div class="text-center">
-                                        <hr><a class="small" href="register.php">Create an Account!</a></div>
-                                    <div class="text-center"><a class="small" href="login.php">Already have an account? Login!</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  
+			<form action="" method="post">
+				<div class="input-group custom input-group-lg">
+					<input type="password" class="form-control" name="new_password" placeholder="New Password" id="login-input" required>
+					<div class="input-group-append custom">
+						<span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+					</div>
+                    <p class="text small text-danger"><?php 
+                    if(isset($error['new_password'])){
+                    echo $error['new_password'];
+                    }elseif(isset($error['password_len'])){
+                    echo $error['password_len'];
+                    }
+                    ?>
+                    </p>
+				</div>
+				<div class="input-group custom input-group-lg">
+					<input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password" id="login-input" required>
+					<div class="input-group-append custom">
+						<span class="input-group-text"><i class="fa fa-lock" aria-hidden="true"></i></span>
+					</div>
+                    <p class="text small text-danger"><?php 
+                    if(isset($error['repeat_password'])){
+                    echo $error['repeat_password'];
+                    }elseif(isset($error['password_len'])){
+                    echo $error['password_len'];
+                    }
+                    ?>
+                    </p>
+				</div>
+				<p class="link">Password should be at least 8 characters</p>
+				<button class="btn btn-primary btn-block text-white btn-user" type="submit" name="confirm">Confirm</button>
+
+			</form>
+			<br>
+			 <div class="text-center">
+                <a class="small" href="login.php">Already a member? Log in!</a></div>
+            <div class="text-center"><a class="small" href="register.php">Create an Account!</a></div>
+		</div>
+	</div>
    <?php include "includes/footer.php";?> 

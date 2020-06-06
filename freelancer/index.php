@@ -23,6 +23,7 @@
                 <div>
                     <h3 class="text-dark mb-0"><strong>Application Statistics</strong></h3>
                 </div>
+              
                 <div class="row">
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-bottom-success py-2">

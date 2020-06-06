@@ -1,0 +1,12 @@
+#login-input {
+  border-radius: 10px !important;
+  height: 30px;
+  background: white !important;
+  font-size: .85rem;
+}
+
+form.user .form-control-user {
+  font-size: .85rem;
+  border-radius: 10px;
+  padding: 1rem .85rem;
+}
