@@ -97,7 +97,7 @@
 				<div class="input-group custom input-group-lg">
 					<input type="email" class="form-control" name="email" placeholder="Email" id="login-input" required>
 					<div class="input-group-append custom">
-						<span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
 					</div>
 					 <!--  if email field is empty alert user-->
                      <p class="text link text-danger"><?php echo isset($error['email']) ? $error['email']:''; ?></p>
@@ -127,16 +127,16 @@
 					<!--  alert user when there is password mismatch -->
                      <p class="text link text-danger"><?php echo isset($error['password_match']) ? $error['password_match']:''; ?></p>
 				</div>
-				<div>
-				<div class="form-check-inline">
-                <input type="radio" class="form-check-input" value="client" name="role" id="client">
-                <label for="roles" class="form-check-label">Client</label>
+				<div class="d-flex">
+				<div class="custom-control custom-radio mb-5 mr-20">
+                <input type="radio" class="custom-control-input" value="client" name="role" id="client">
+                <label for="client" class="custom-control-label weight-400">Client</label>
 				    
 				</div>
 
-				<div class="form-check-inline">
-                <input type="radio" class="form-check-input" value="freelancer" name="role" id="freelancer" checked>
-                <label for="roles" class="form-check-label">Freelancer</label>
+				<div class="custom-control custom-radio mb-5 mr-20">
+                <input type="radio" class="custom-control-input" value="freelancer" name="role" id="freelancer" checked>
+                <label for="freelancer" class="custom-control-label weight-400">Freelancer</label>
 				    
 				</div>
                 </div>

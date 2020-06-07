@@ -63,7 +63,7 @@
 				<div class="input-group custom input-group-lg">
 					<input type="password" class="form-control" name="new_password" placeholder="New Password" id="login-input" required>
 					<div class="input-group-append custom">
-						<span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="input-group-text"><i class="fa fa-lock" aria-hidden="true"></i></span>
 					</div>
                     <p class="text small text-danger"><?php 
                     if(isset($error['new_password'])){

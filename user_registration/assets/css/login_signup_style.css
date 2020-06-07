@@ -1,13 +1,22 @@
-.img-logo {
+.logo {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.dashboard-logo {
+  width: 100px;
+}
+
+.joblllery-logo {
   width: 100px;
 }
 
 .form-control:focus {
-  color: #2c435b;
+  color: #393939;
   background-color: #fff;
-  border-color: #2c435b;
+  border-color: #00d820;
   outline: 0;
-  box-shadow: 0 0 0 .2rem #00d820;
+  box-shadow: 0 0 0 .2rem rgba(78,206,122,0.25);
 }
 
 .bg-gradient-primary {
@@ -29,7 +38,7 @@ form.user .form-control-user {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #393939;
+  color: #2c435b;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #00d820;
@@ -49,7 +58,7 @@ form.user .form-control-user {
 .signup-label {
   margin-left: 12px;
   font-size: 1rem;
-  color: #00d820;
+  color: #2c435b;
 }
 
 form.user .btn-user {
@@ -76,30 +85,25 @@ form.user .btn-user {
 }
 
 a {
-  color: #00d820;
+  color: #04ac71;
   text-decoration: none;
   background-color: transparent;
 }
 
 .small:hover {
-  color: #2c435b;
+  color: #528691;
   text-decoration: underline;
 }
 
 #login_container {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  background: #f5f5f5;
-  margin-top: 100px;
+  background: inherit;
 }
 
 #login-input {
   border-radius: 5px !important;
   background: white !important;
   font-size: 1rem;
-}
-
-.register-label {
-  color: #393939;
 }
 

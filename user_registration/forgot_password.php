@@ -47,7 +47,7 @@
 				<div class="input-group custom input-group-lg">
 					<input type="email" class="form-control" name="email" placeholder="Enter Email" id="login-input" required>
 					<div class="input-group-append custom">
-						<span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
 					</div>
 					 <p class="text link text-danger"><?php echo isset($error) ? $error:''; ?></p>
 				</div>
