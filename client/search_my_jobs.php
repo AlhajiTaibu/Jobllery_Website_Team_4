@@ -22,17 +22,18 @@
             <div class="container-fluid profile">
                 <div class="profile-container">
                     <h4 class="header"><strong>Manage Jobs</strong></h4>
-                    <form action="search_my_jobs.php" method="post">
+                    <br>
+<!--
+                    <form action="" method="post">
                         <div class="form-row" id="row-style">
                             <div class="col-12 offset-0 col-md-6 col-sm-9 col-xs-12 col-lg-4" id="forms">
                                 <div class="input-group">
-                                <input class="form-control input-btn" type="text" placeholder="Search" name="search_name"><span class="input-group-append">
-                                <button class="btn btn-outline-success btn-sm" id="search-btn" name="search">
+                                <input class="form-control input-btn" type="text" placeholder="Search" name="search"><span class="input-group-append">
+                                <button class="btn btn-outline-success btn-sm" id="search-btn" type="button" name="sort">
                                 <i class="fa fa-search search-icon"></i>
                                 </button></span>
                                 </div>
                             </div>
-                             </form>
                             <div class="col-7 col-md-2 offset-1 offset-md-0 col-md-2 col-sm-4 col-xs-12 col-lg-4 sort-col" id="forms">
 
                             </div>
@@ -40,7 +41,8 @@
 
                             </div>
                         </div>
-                   
+                    </form>
+-->
                     <div class="container-fluid">
                         <div class="table-responsive table-borderless" id="table-background">
                             <table class="table">
@@ -48,14 +50,23 @@
                                     <tr>
                                         <th class="job_table">Job Logo</th>
                                         <th class="job_table">Job Details</th>
-                                        <th class="text-left">Applicants</th>
+                                        <th class="text-left">No. of Applicants</th>
                                         <th class="text-left">Status</th>
                                         <th class="text-left">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                            <?php     
-                            $query="SELECT * FROM job_post WHERE client_id={$_SESSION['user_id']} ORDER BY createdAt DESC"; 
+                            <?php 
+                            if(isset($_POST['search'])){
+
+                            $search_tag =trim($_POST['search_name']);
+
+                            if(!empty($search_tag)){
+                            
+                            echo "<h6><strong>Search results for ".$search_tag." are:</strong></h6><a href='my_jobs.php'>  All Jobs</a>";
+                                
+                            $query="SELECT * FROM job_post WHERE client_id={$_SESSION['user_id']} AND tags LIKE '%$search_tag%' ORDER BY createdAt DESC";
+                                
                             $select_job_by_client = mysqli_query($connection,$query);
                             confirmQuery($select_job_by_client);
                             
@@ -130,6 +141,12 @@
                                         <a href="my_jobs.php?p_id=<?php echo $job_post_id;?>"><i class="icon ion-android-delete trash"></i></a></td>
                                     </tr>
                                      <?php  }
+                                        }else{
+                                            header("Location:my_jobs.php");
+                                        }
+                                    }else{
+                                        
+                                    }
                                     
                                     ?>
 
@@ -143,7 +160,7 @@
                                     $query="DELETE FROM job_post WHERE job_post_id='$job_post_id'";
                                     $delete_job_post = mysqli_query($connection,$query);
                                     confirmQuery($delete_job_post);
-                                    header("Location:my_jobs.php");
+                                    header("Location:search_my_jobs.php");
                                 }
                             
                             ?>

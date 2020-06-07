@@ -1,0 +1,25 @@
+<svg id="Chat" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2c435b;
+      }
+
+      .cls-2 {
+        fill: #00d820;
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill: #ffe713;
+      }
+    </style>
+  </defs>
+  <circle id="Ellipse_1_copy" data-name="Ellipse 1 copy" class="cls-1" cx="100" cy="100" r="100"/>
+  <path class="cls-2" d="M554.594,446.015H445.406a9.393,9.393,0,0,0-9.4,9.39V520.41a9.391,9.391,0,0,0,9.4,9.387H490.16l-10.309,25.188L509.412,529.8h45.182a9.393,9.393,0,0,0,9.4-9.387v-65A9.394,9.394,0,0,0,554.594,446.015Z" transform="translate(-400 -400)"/>
+  <g>
+    <circle class="cls-3" cx="65.5" cy="90.5" r="10.5"/>
+    <circle id="Ellipse_3_copy" data-name="Ellipse 3 copy" class="cls-3" cx="100.5" cy="90.5" r="10.5"/>
+    <circle id="Ellipse_3_copy_2" data-name="Ellipse 3 copy 2" class="cls-3" cx="135.5" cy="90.5" r="10.5"/>
+  </g>
+</svg>

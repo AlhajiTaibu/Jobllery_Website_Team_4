@@ -1,0 +1,46 @@
+<svg id="Post_a_job" data-name="Post a job" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2c435b;
+      }
+
+      .cls-2, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #00d820;
+      }
+
+      .cls-4 {
+        fill: #707070;
+      }
+
+      .cls-5 {
+        font-size: 10px;
+        font-family: "Open Sans";
+        font-weight: 300;
+      }
+
+      .cls-6 {
+        fill: #ffe713;
+        stroke: #707070;
+        stroke-width: 0.51px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="100" cy="100" r="100"/>
+  <g id="paper">
+    <rect id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-2" x="35" y="65" width="130" height="90"/>
+    <path id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-3" d="M45,46H155a10,10,0,0,1,10,10V66a0,0,0,0,1,0,0H35a0,0,0,0,1,0,0V56A10,10,0,0,1,45,46Z"/>
+    <rect class="cls-4" x="54" y="74" width="93" height="5"/>
+    <rect id="Rectangle_1_copy" data-name="Rectangle 1 copy" class="cls-4" x="54" y="87" width="93" height="5"/>
+    <rect id="Rectangle_1_copy_2" data-name="Rectangle 1 copy 2" class="cls-4" x="54" y="100" width="93" height="5"/>
+    <rect id="Rectangle_1_copy_3" data-name="Rectangle 1 copy 3" class="cls-4" x="54" y="113" width="93" height="5"/>
+    <rect class="cls-3" x="54" y="126" width="93" height="15"/>
+    <text id="Post_a_Job-2" data-name="Post a Job" class="cls-5" x="77.667" y="135.667">Post a Job</text>
+  </g>
+  <path class="cls-6" d="M561.2,551.886l-14.336,3.023-7.784,12.413L531.856,533.4Z" transform="translate(-400 -400)"/>
+</svg>

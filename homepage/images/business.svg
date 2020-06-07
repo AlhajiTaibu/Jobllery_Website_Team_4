@@ -1,0 +1,20 @@
+<svg id="business_center-black-18dp" xmlns="http://www.w3.org/2000/svg" width="105.024" height="105.024" viewBox="0 0 105.024 105.024">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffe713;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
+        fill: #05ac72;
+      }
+    </style>
+  </defs>
+  <rect id="Rectangle_743" data-name="Rectangle 743" class="cls-1" width="18" height="18" transform="translate(43 52)"/>
+  <path id="Path_3" data-name="Path 3" class="cls-2" d="M0,0H105.024V105.024H0ZM43.76,21.88h17.5v8.752H43.76Zm0,0h17.5v8.752H43.76Z"/>
+  <path id="Path_4" data-name="Path 4" class="cls-3" d="M37.008,59.888V55.512H6.42l-.044,17.5a8.722,8.722,0,0,0,8.752,8.752H76.392a8.722,8.722,0,0,0,8.752-8.752v-17.5H54.512v4.376ZM80.768,20.5H63.22V11.752L54.468,3h-17.5l-8.752,8.752V20.5H10.752A8.778,8.778,0,0,0,2,29.256V42.384a8.722,8.722,0,0,0,8.752,8.752H37.008V42.384h17.5v8.752H80.768a8.778,8.778,0,0,0,8.752-8.752V29.256A8.778,8.778,0,0,0,80.768,20.5Zm-26.256,0h-17.5V11.752h17.5Z" transform="translate(6.752 10.128)"/>
+</svg>

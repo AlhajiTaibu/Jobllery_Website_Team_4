@@ -27,10 +27,10 @@
                                 <div class="input-group"><input class="form-control input-btn" type="text" placeholder="Search"><span class="input-group-append"><button class="btn btn-outline-success btn-sm" id="search-btn" type="button"><i class="fa fa-search d-inline-block search-icon"></i></button></span></div>
                             </div>
                             <div class="col-1 col-md-3 col-lg-1 offset-3 offset-md-3 offset-lg-0 col-md-2 col-sm-4 col-xs-12 col-lg-4 sort-col" id="forms">
-                                <div class="sort"><label class="text-nowrap" for="search">Sort by</label></div>
+<!--                                <div class="sort"><label class="text-nowrap" for="search">Sort by</label></div>-->
                             </div>
                             <div class="col-12 col-md-6 col-lg-3 offset-0 col-md-4 col-sm-8" id="forms">
-                                <div><select class="form-control input-btn"><option value="undefined">Newest</option><option value="">Date</option><option value="">Ascending</option><option value="">Descending</option></select></div>
+<!--                                <div><select class="form-control input-btn"><option value="undefined">Newest</option><option value="">Date</option><option value="">Ascending</option><option value="">Descending</option></select></div>-->
                             </div>
                         </div>
                     </form>

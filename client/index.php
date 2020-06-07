@@ -1,4 +1,6 @@
 <?php include "includes/header.php";?>
+   <?php include "../freelancer/includes/db.php";?>
+<?php include "../freelancer/includes/functions.php";?>
     <div id="wrapper">
         <nav class="navbar navbar-dark fixed-top align-items-start sidebar sidebar-dark accordion bg-gradient-success p-0" id="sidebar-color">
             <div class="container-fluid d-flex flex-column p-0">
@@ -32,7 +34,15 @@
                                         <div class="text-dark font-weight-bold h5 mb-0"></div>
                                     </div>
                                 </div>
-                                <h3><strong>8</strong></h3>
+                                <?php
+                                $query="SELECT * FROM job_post WHERE client_id={$_SESSION['user_id']}"; 
+                                $select_job_by_client = mysqli_query($connection,$query);
+                                confirmQuery($select_job_by_client);
+                                $number_of_post = mysqli_num_rows($select_job_by_client);
+                           
+                                ?>
+                                
+                                <h3><strong><?php echo $number_of_post; ?></strong></h3>
                                 <h6>Posted Jobs<br></h6>
                             </div>
                         </div>

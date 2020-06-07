@@ -1,0 +1,15 @@
+<svg id="local_cafe-black-18dp" xmlns="http://www.w3.org/2000/svg" width="95.045" height="95.045" viewBox="0 0 95.045 95.045">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #05ac72;
+      }
+    </style>
+  </defs>
+  <path id="Path_26" data-name="Path 26" class="cls-1" d="M0,0H95.045V95.045H0Z"/>
+  <path id="Path_27" data-name="Path 27" class="cls-2" d="M67.363,3H4V42.6A15.836,15.836,0,0,0,19.841,58.443H43.6A15.836,15.836,0,0,0,59.443,42.6V30.722h7.92a7.918,7.918,0,0,0,7.92-7.92V10.92A7.893,7.893,0,0,0,67.363,3Zm0,19.8h-7.92V10.92h7.92ZM4,66.363H67.363v7.92H4Z" transform="translate(11.841 8.881)"/>
+</svg>

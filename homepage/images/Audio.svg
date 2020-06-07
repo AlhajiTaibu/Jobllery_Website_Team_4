@@ -1,0 +1,9 @@
+<svg id="poll-black-18dp" xmlns="http://www.w3.org/2000/svg" width="93.275" height="93.275" viewBox="0 0 93.275 93.275">
+  <rect id="Rectangle_740" data-name="Rectangle 740" width="54" height="56" transform="translate(24 16)" fill="#00d820"/>
+  <g id="Rectangle_742" data-name="Rectangle 742" transform="translate(37 16)" fill="#fff" stroke="#707070" stroke-width="1">
+    <rect width="20" height="56" stroke="none"/>
+    <rect x="0.5" y="0.5" width="19" height="55" fill="none"/>
+  </g>
+  <path id="Path_40" data-name="Path 40" d="M65.183,3H10.773A7.8,7.8,0,0,0,3,10.773v54.41a7.8,7.8,0,0,0,7.773,7.773h54.41a7.8,7.8,0,0,0,7.773-7.773V10.773A7.8,7.8,0,0,0,65.183,3ZM26.319,57.41H18.546V30.205h7.773Zm15.546,0H34.092V18.546h7.773Zm15.546,0H49.637V41.864H57.41Z" transform="translate(8.659 8.659)" fill="#05ac72"/>
+  <path id="Path_41" data-name="Path 41" d="M0,0H93.275V93.275H0Z" fill="none"/>
+</svg>
