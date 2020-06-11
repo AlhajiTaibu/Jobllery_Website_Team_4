@@ -1,5 +1,16 @@
 <?php include "includes/header.php";?>
-  <?php include "includes/navigation.php";?>
+<!--  <?php include "includes/navigation.php";?>-->
+  <div class="header">
+
+			 <a href=""><img class="logo" src="../loginsignup/images/jlogo.png"></a>
+
+				
+			 <img class="midtext" src="../loginsignup/images/textAnim.gif">
+
+				<br>
+			 <span class="notice">DON'T HAVE AN ACCOUNT?<a href="register.php"> SIGN UP</a></span>
+		
+	</div>
    <?php include "../freelancer/includes/db.php"; ?>
    <?php include "../freelancer/includes/functions.php"; ?>
     <div class="login-wrap customscroll d-flex align-items-center flex-wrap justify-content-center pd-20">

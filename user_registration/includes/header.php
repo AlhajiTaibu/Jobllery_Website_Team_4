@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/login_signup_style.css">
     <link rel="stylesheet" href="assets/css/mystyle.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../loginsignup/loginsignupheader.css">
 
 </head>
 

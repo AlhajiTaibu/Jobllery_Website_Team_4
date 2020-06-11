@@ -1,4 +1,4 @@
-  <div>
+<div>
        <nav class="navbar navbar-light navbar-expand fixed-top bg-white shadow mb-4 topbar static-top">
         <a href="../homepage/index.php">
         <div class="container-fluid">

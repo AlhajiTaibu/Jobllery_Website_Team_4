@@ -1,0 +1,127 @@
+body{
+	margin: 0;
+}
+
+.header {
+	height: 80px;
+	width: 100%;
+	background-color: rgba(228,228,228,0.2);
+	box-shadow: 5px 0.5px 10px;
+    margin-left: 0px;
+}
+
+.logo {
+	width: 122px;
+	height: 37px;
+	margin-left: 4%;
+	margin-top: 0px;
+	float: left;
+	transition: 0.5s;
+}
+
+.logo:hover {
+	transform: scale(0.5, 0.5);
+}
+
+.midtext {
+	float: left;
+	height: 62px;
+	width: 203px;
+	margin-left: 25%;
+	margin-top: -10px;
+}
+
+.notice {
+	float: right;
+	padding-right: 5%;
+	font-size: 14px;
+	margin-top: -10px;
+	color: #2c435b;
+}
+
+.notice a {
+	text-decoration: none;
+	color: #00d820;
+	margin-left: 6px;
+	font-weight: bold;
+	transition: 0.5s;
+}
+
+.notice a:hover {
+	color: #2c435b;
+	transform: scale(2, 2);
+}
+
+/* On screens that are 992px or less */
+@media screen and (max-width: 992px) {
+  .logo {
+  	width: 81px;
+	height: 25px;
+	margin-top: 5px;
+  }
+
+  .midtext {
+	height: 62px;
+	width: 203px;
+	margin-left: 15%;
+	margin-top: 20px;
+  }
+
+  .notice {
+	font-size: 12px;
+}
+
+}
+
+/* On screens that are 800px or less */
+@media screen and (max-width: 800px) {
+   .midtext {
+	margin-left: 15%;
+  }
+}
+
+
+/* On screens that are 720px or less */
+@media screen and (max-width: 720px) {
+ .logo {
+  	width: 64px;
+	height: 20px;
+	margin-top: 10px;
+ }
+
+ .midtext {
+   	height: 42px;
+	width: 162px;
+	margin-top: 2px;
+	margin-left: 15%;
+  }
+
+.notice {
+	font-size: 10px;
+}
+	
+}
+
+/* On screens that are 580px or less */
+@media screen and (max-width: 580px) {
+ .logo {
+  	width: 48px;
+	height: 15px;
+    margin-top: 15px;
+	padding-top: 0px;
+ }
+
+ .midtext {
+ 	display: none;
+   	/*height: 42px;
+	width: 162px;
+	padding-top: 5px;
+	padding-left: 6%;*/
+  }
+
+  .notice {
+	font-size: 14px;
+
+}
+
+}

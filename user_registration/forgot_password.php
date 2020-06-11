@@ -2,7 +2,18 @@
  <?php include "../freelancer/includes/db.php"; ?>
    <?php include "../freelancer/includes/functions.php"; ?>
     <?php require 'PHPMailer/PHPMailerAutoload.php';?>
-  <?php include "includes/navigation.php";?>
+<!--  <?php include "includes/navigation.php";?>-->
+  <div class="header">
+
+			 <a href=""><img class="logo" src="../loginsignup/images/jlogo.png"></a>
+
+				
+			 <img class="midtext" src="../loginsignup/images/textAnim.gif">
+
+				<br>
+			 <span class="notice">ALREADY HAVE AN ACCOUNT?<a href="login.php"> LOGIN </a></span>
+		
+	</div>
    <div class="login-wrap customscroll d-flex align-items-center flex-wrap justify-content-center pd-20">
 		<div class="login-box bg-white box-shadow pd-30 border-radius-5">
 <!--			<img src="vendors/images/login-img.png" alt="login" class="login-img">-->
