@@ -7,3 +7,19 @@
     margin-bottom: -20px !important;
    
 }
+
+#shortlisted-candidates{
+    margin-top: 5px;
+    margin-left: 0px !important;
+}
+
+.fas.fa-check{
+  border: 1px solid #00d820;
+  color: white;
+  background: #00d820;
+  width: 35px;
+  height: 35px;
+  padding: 10px;
+    
+}
+

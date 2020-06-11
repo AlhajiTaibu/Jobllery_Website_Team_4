@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>Jobllery</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" href="images/jlogo.png">
@@ -27,9 +27,18 @@
 			        </ul>
 			    </div>
 
+			    <!-- search bar -->
+			<div class="uk-margin navSearch">
+			    <form class="uk-search uk-search-default searchbar">
+			        <a href="" uk-search-icon></a>
+			        <input class="uk-search-input searchbox" type="search" placeholder="Find freelancers & Agencies">
+			    </form>
+			</div>
+			   <!--  search bar ends -->
+
 			    <div class="uk-navbar-right">
 			        <ul class="uk-navbar-nav">
-                       <?php
+                         <?php
                             if(isset($_SESSION['username'])){
                                 if($_SESSION['user_role']=='client'){
                                   echo '<li class="uk-active"><a href="../client/index.php">'.$_SESSION['username'].'</a></li>';   
@@ -41,11 +50,10 @@
                                
                             }
                         ?>
-                          
 			            <li class="uk-active"><a href="../user_registration/login.php">LOG IN</a></li>
 			            <li class="uk-active"><a href="../user_registration/register.php">SIGN UP</a></li>
 			            <div class="uk-navbar-item">
-			                <button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/login.php">Post a Job</a></button>
+			                <button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>
 			        	</div>
 			             <div class="uk-navbar-item">
 			                <button class="uk-button uk-button-default navbutton1"><a class="btns" href="../workspace/workspace.php">Browse Jobs</a></button>
@@ -53,14 +61,58 @@
 			        </ul>
 			    </div>
 
-			</nav> <!-- Navbar ends here -->
+			</nav> 
 		</div>
+			<!-- Navbar ends here -->
+
 					<!-- slideshow settings -->
-	        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="ratio: 1200:400; animation: fade; autoplay: true;" >
+	        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="ratio: 1200:500; animation: fade; autoplay: true;" >
+
+	        		          <!--   dynamic search box -->
+	<div class="searchBox">
+		<form action="#" method="#">
+			<button class="find findJob">Find a Job</button> <button class="find findClient"> Find Client</button> <br>
+		  <input type="text" class="tBox" id="job" 	name="job" placeholder="eg. Graphic Designer">
+		  <select class="select" id="cat">
+			<option>Category</option>
+			<option>Graphic Designing</option>
+			<option>Digital Marketing</option>
+			<option>Programming & Tech.</option>
+			<option>Video & Animation</option>
+			<option>Lifestyle</option>	
+			<option>Music & Audio</option>
+			<option>Writing & Translation</option>
+			<option>Business</option>
+		  </select>
+		  <input type="text" class="tBox" id="loc"  name="location" placeholder="location">
+		  <input class="search" type="submit" name="Search" value="Search">
+
+			 <div class="forClient">
+				  <input type="text" class="tBox" id="job" 	name="job" placeholder="eg. Godsway Nyatoame">
+				  <select class="select" id="cat">
+					<option>Category</option>
+					<option>Android Dev</option>
+					<option>Web Developer</option>
+					<option>Digital Marketer</option>
+					<option>Video Editor</option>
+					<option>Programmer</option>	
+					<option>Graphic Designer</option>
+					<option>Writer</option>
+					<option>Software Tester</option>
+				  </select>
+				  <input type="text" class="tBox" id="loc"  name="location" placeholder="location">
+		  		  <input class="search" type="submit" name="Search" value="Search">
+			 </div>
+
+		</form>
+	</div>
 
 	            <ul class="uk-slideshow-items">
+	            	<li>
+						<video src="videos/tech.mp4" autoplay loop muted playsinline uk-cover></video>
+					</li>
 	                <li>
-	                    <img src="images/ad1.jpg"  alt="pic" uk-cover>
+	                    <img src="images/slide.jpg"  alt="pic" uk-cover>
 	                    <div class="uk-position-center uk-position-small uk-text-center uk-light">
 	                    	<!-- text on slideshow -->
 	                	<h2 class="uk-margin-remove"><a class="slidelink">Jobllery</a></h2>
@@ -68,10 +120,13 @@
 	            		</div>
 	                </li>
 	                <li>
-	                    <img src="images/ad.jpg"  alt="pic" uk-cover>
+	                    <img src="images/slide1.jpg"  alt="pic" uk-cover>
 	                </li>
 	                <li>
-	                    <img src="images/ad2.jpg"  alt="pic" uk-cover>
+	                    <img src="images/slide2.jpg"  alt="pic" uk-cover>
+	                </li>
+	                <li>
+	                    <img src="images/slide3.jpg"  alt="pic" uk-cover>
 	                </li>
 
 	            </ul>
@@ -82,7 +137,13 @@
 	        				 <!-- three dots under slideshow -->
 	          <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
 
-    </div>	<!-- end of slideshow -->
+    </div>
+       <!--  <li>
+            <iframe src="" frameborder="0" uk-cover></iframe>
+        </li> -->
+</div>
+
+    <!-- end of slideshow -->
 
 
      <!-- Categories -->
@@ -90,7 +151,7 @@
 
        		<h3> Categories </h3>
 
-       		<div class="cat_one">
+       		<div uk-scrollspy="cls:uk-animation-slide-bottom; delay: 300; repeat:true;" class="cat_one">
        			<div class="graph">
        				<div class="innerbox">
 		       			<a href="#"><img src="images/graphics.svg"></a>
@@ -106,7 +167,7 @@
        			</div>
        		</div>
        		
-       		<div class="cat_one">
+       		<div uk-scrollspy="cls:uk-animation-slide-top; delay: 300; repeat:true;" class="cat_one">
        			<div class="graph">
        				<div class="innerbox">
 		       			<a href="#"><img src="images/digitalmarketing.svg"></a>
@@ -122,7 +183,7 @@
        			</div>
        		</div>
        		
-       		<div class="cat_one">
+       		<div uk-scrollspy="cls:uk-animation-slide-bottom; delay: 300; repeat:true;" class="cat_one">
        			<div class="graph">
        				<div class="innerbox">
 		       			<a href="#"><img src="images/programming.svg"></a>
@@ -138,7 +199,7 @@
        			</div>
        		</div>
        		
-       		<div class="cat_one">
+       		<div uk-scrollspy="cls:uk-animation-slide-top; delay: 300; repeat:true;" class="cat_one">
        			<div class="graph">
        				<div class="innerbox">
 		       			<a href="#"><img src="images/video.svg"></a>	
@@ -164,7 +225,7 @@
  	  <div class="information">
  	  	<h3>How It Works</h3>
 
- 	  	<div class="info">
+ 	  	<div uk-scrollspy="cls:uk-animation-slide-left; repeat:true;" class="info">
  	  	 	<div class="info_msg">
 	 	  	 <span class="topic">Post a Job</span> <br>
 	 	  	 <span>
@@ -200,7 +261,7 @@
  	  	</div>
 
 
- 	  	<div class="info">
+ 	  	<div uk-scrollspy="cls:uk-animation-slide-right; repeat:true;" class="info">
  	  		<img src="images/abt.jpg" alt="pic">
  	  	</div>
 
@@ -343,12 +404,12 @@
 
 
 
- 	  <!-- before footer -->
+ 	   <!-- before footer -->
  	  	<div class="before_footer">
  	  		<div class="footer">
  	  		 <div class="footer_items">
 	 	  	  <span class="topic">About</span> <br>
-		 	  	 <span>
+		 	  	 <span class="topic_content">
 		 	  	 	Careers <br>
 		 	  	 	Press and News <br>
 		 	  	 	Partnership <br>
@@ -358,17 +419,17 @@
 		 	  	 </span>
  	  		</div>
  	  		
- 	  		<div class="footer_items">
+ 	  		<div class="footer_items support">
 	 	  	 <span class="topic">Support</span> <br>
-		 	  	 <span>
+		 	  	 <span class="topic_content">
 		 	  	 	Help & Support <br>
 		 	  	 	Safety <br>
 		 	  	 </span>
  	  		</div>
 
-	  		<div class="footer_items">
+	  		<div class="footer_items events">
 		 	  	 <span class="topic">Community</span> <br>
-		 	  	 <span>
+		 	  	 <span class="topic_content">
 		 	  	 	Event <br>
 		 	  	 	Blog <br>
 		 	  	 	Forum <br>
@@ -386,11 +447,11 @@
  	  			<div class="footer_content">
 
  	  				<div class="log_sm">
- 	  					 <h2> <a href="">Jobllery </a></h2>
+ 	  					 <a href=""> <img src="images/jlogo.png"> </a>
  	  				</div>
 
- 	  				<div class="log_sm">
- 	  					<span>
+ 	  				<div class="log_sm for_mobile">
+ 	  					<span class="address">
 		 	  				<span class="c_right">&copy;</span>2019 - <script>document.write( new Date().getFullYear() );</script>
 							 Jobllery<span class="reg">&reg;</span> Inc. | All rights reserved <br>
 							 SSNIT House, 27 Ama Akroma Road <br>
@@ -398,13 +459,13 @@
  	  					</span>	
  	  				</div>
 
- 	  				<div class="log_sm">
+ 	  				<div class="log_sm for_mobile">
  	  					<span class="sm_links">
- 	  						<a href=""><i class="fab fa-facebook-f fa-1x"></i></a>
- 	  						<a href=""><i class="fab fa-twitter fa-1x"></i></a>
- 	  						<a href=""><i class="fab fa-instagram fa-1x"></i></a>
- 	  						<a href=""><i class="fab fa-youtube fa-1x"></i></a>
- 	  						<a href=""><i class="fab fa-linkedin-in fa-1x"></i></a>
+ 	  						<a href=""><i class="sm fb fab fa-facebook-f fa-1x"></i></a>
+ 	  						<a href=""><i class="sm fab fa-twitter fa-1x"></i></a>
+ 	  						<a href=""><i class="sm fab fa-instagram fa-1x"></i></a>
+ 	  						<a href=""><i class="sm fab fa-youtube fa-1x"></i></a>
+ 	  						<a href=""><i class="sm fab fa-linkedin-in fa-1x"></i></a>
  	  					</span>
  	  					
  	  				</div>

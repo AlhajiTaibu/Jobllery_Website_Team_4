@@ -144,7 +144,7 @@
 
 				
 				
-				<button class="btn btn-primary btn-block text-white btn-user" type="submit" name="submit">Login</button>
+				<button class="btn btn-primary btn-block text-white btn-user" type="submit" name="submit">Sign Up</button>
 
 			</form>
 			<br>

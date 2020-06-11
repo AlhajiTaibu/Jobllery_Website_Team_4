@@ -97,16 +97,16 @@ function register_user($username,$email,$password,$user_role){
         $mail->SMTPAuth = true;
 
         //Username to use for SMTP authentication - use full email address for gmail
-        $mail->Username = "alhabdutaib@gmail.com";
+        $mail->Username = "jobllery@gmail.com";
 
         //Password to use for SMTP authentication
-        $mail->Password = "Abdurami@1992";
+        $mail->Password = "@malyt3k";
 
         //Set who the message is to be sent from
-        $mail->setFrom('alhabdutaib@gmail.com', 'Localhost');
+        $mail->setFrom('jobllery@gmail.com', 'Jobllery');
 
         //Set an alternative reply-to address
-        $mail->addReplyTo('alhabdutaib@gmail.com', 'Localhost');
+        $mail->addReplyTo('jobllery@gmail.com', 'Jobllery');
 
         //Set who the message is to be sent to
         $mail->addAddress($email, '$username');
@@ -203,7 +203,7 @@ function login_user($email,$password){
     $_SESSION['user_role'] = $db_user_role;
     $_SESSION['user_id'] =  $db_user_id;
     
-    header("Location:../client/index.php");              // Redirecting the user to the client dashboard if condition is true
+    header("Location:../client/profile.php");              // Redirecting the user to the client dashboard if condition is true
       
     }
         
@@ -215,7 +215,7 @@ function login_user($email,$password){
     $_SESSION['user_role'] = $db_user_role;
     $_SESSION['user_id'] =  $db_user_id;
     
-    header("Location:../freelancer/index.php");      // Redirecting the user to the freelancer dashboard if condition is true
+    header("Location:../freelancer/profile.php");      // Redirecting the user to the freelancer dashboard if condition is true
   
     }
     }
@@ -287,16 +287,16 @@ function forgetPassword($email){
         $mail->SMTPAuth = true;
 
         //Username to use for SMTP authentication - use full email address for gmail
-        $mail->Username = "alhabdutaib@gmail.com";
+        $mail->Username = "jobllery@gmail.com";
 
         //Password to use for SMTP authentication
-        $mail->Password = "Abdurami@1992";
+        $mail->Password = "@malyt3k";
 
         //Set who the message is to be sent from
-        $mail->setFrom('alhabdutaib@gmail.com', 'Localhost');
+        $mail->setFrom('jobllery@gmail.com', 'Localhost');
 
         //Set an alternative reply-to address
-        $mail->addReplyTo('alhabdutaib@gmail.com', 'Localhost');
+        $mail->addReplyTo('jobllery@gmail.com', 'Localhost');
 
         //Set who the message is to be sent to
         $mail->addAddress($db_email,  '$username');
@@ -389,7 +389,7 @@ function confirmPassword($new_password,$repeat_password,$user_id){
 
 
 // Method for editing freelancer's profile
-function updateProfile($firstname,$lastname,$address,$contact_number,$experience,$dob,$job_title,$gender,$qualification, $description, $link, $tags,$profile_image){
+function createProfile($user_id,$firstname,$lastname,$address,$contact_number,$experience,$dob,$gender,$qualification, $description, $link, $tags,$profile_image){
    
     global $connection;             // declaring the $connection variable global
     
@@ -402,7 +402,7 @@ function updateProfile($firstname,$lastname,$address,$contact_number,$experience
         $contact_number=mysqli_real_escape_string($connection,$contact_number);
         $experience=mysqli_real_escape_string($connection,$experience);
         $dob=mysqli_real_escape_string($connection,$dob);
-        $job_title=mysqli_real_escape_string($connection,$job_title);
+        
         $gender=mysqli_real_escape_string($connection,$gender);
         $qualification=mysqli_real_escape_string($connection,$qualification);
         $description=mysqli_real_escape_string($connection,$description);
@@ -411,13 +411,51 @@ function updateProfile($firstname,$lastname,$address,$contact_number,$experience
         $profile_image=mysqli_real_escape_string($connection,$profile_image);
         
         //preparing mysqli query for inserting into the database
-        $query="INSERT INTO profile(first_name,last_name,address,dob,image,contact_number,experience,gender,qualification,description,url,tags) VALUES('$firstname','$lastname','$address','$dob','$profile_image','$contact_number','$experience','$gender','$qualification','$description','$link','$tags')";
+        $query="INSERT INTO profile(user_id,first_name,last_name,address,dob,image,contact_number,experience,gender,qualification,description,url,tags) VALUES('$user_id','$firstname','$lastname','$address','$dob','$profile_image','$contact_number','$experience','$gender','$qualification','$description','$link','$tags')";
+       
+        $create_profile=mysqli_query($connection,$query);                   // setting a variable to mysqli query
+        
+        confirmQuery($create_profile);                                      // validation of mysqli query
+        
+       echo "<h6 class='alert alert-success'>Profile created successfully. Click here to view your profile<a href='../profile_page/freelancer_profile_page.php?p_id=$user_id'>   View Profile</a></h6>";                                 // Alert user
+    
+}
+
+
+}
+
+
+
+// Method for editing freelancer's profile
+function updateProfile($user_id,$firstname,$lastname,$address,$contact_number,$experience,$dob,$gender,$qualification, $description, $link, $tags,$profile_image){
+   
+    global $connection;             // declaring the $connection variable global
+    
+    if(!empty($firstname)&&!empty($lastname)&&!empty($address)&&!empty($gender)){   //checking parameters for empty string
+        
+        // cleaning of parameter to prevent mysql injections
+        $firstname=mysqli_real_escape_string($connection,$firstname);
+        $lastname=mysqli_real_escape_string($connection,$lastname);
+        $address=mysqli_real_escape_string($connection,$address);
+        $contact_number=mysqli_real_escape_string($connection,$contact_number);
+        $experience=mysqli_real_escape_string($connection,$experience);
+        $dob=mysqli_real_escape_string($connection,$dob);
+        
+        $gender=mysqli_real_escape_string($connection,$gender);
+        $qualification=mysqli_real_escape_string($connection,$qualification);
+        $description=mysqli_real_escape_string($connection,$description);
+        $link=mysqli_real_escape_string($connection,$link);
+        $tags=mysqli_real_escape_string($connection,$tags);
+        $profile_image=mysqli_real_escape_string($connection,$profile_image);
+        
+        //preparing mysqli query for inserting into the database
+         $query="UPDATE profile SET first_name='$firstname',last_name='$lastname',address='$address',dob='$dob',contact_number='$contact_number',experience='$experience',gender='$gender',qualification='$qualification',image='$profile_image',description='$description',url='$link',tags='$tags',updatedAt=now() WHERE user_id={$user_id}";
        
         $update_profile=mysqli_query($connection,$query);                   // setting a variable to mysqli query
         
         confirmQuery($update_profile);                                      // validation of mysqli query
         
-       echo $message="<h6 class='alert alert-success'>Profile updated successfully. Click here to view your profile<a href='#? '>   View Profile</a></h6>";                                 // Alert user
+       echo "<h6 class='alert alert-success'>Profile updated successfully. Click here to view your profile<a href='../profile_page/freelancer_profile_page.php?p_id=$user_id'>   View Profile</a></h6>";                                 // Alert user
     
 }
 
@@ -426,7 +464,7 @@ function updateProfile($firstname,$lastname,$address,$contact_number,$experience
 
 
 // Method for editing client's profile
-function updateClientProfile($firstname,$lastname,$address,$contact_number,$dob,$job_title,$gender, $description, $link, $tags,$profile_image){
+function createClientProfile($user_id,$firstname,$lastname,$address,$contact_number,$dob,$job_title,$gender, $description, $link, $tags,$profile_image){
     
     global $connection;             // declaring the $connection variable global
     
@@ -446,18 +484,55 @@ function updateClientProfile($firstname,$lastname,$address,$contact_number,$dob,
         $profile_image=mysqli_real_escape_string($connection,$profile_image);
         
         //preparing mysqli query for inserting into the database
-        $query="INSERT INTO client(firstname,lastname,address,dob,contact_number,job_title,gender,image,description,url,tags) VALUES('$firstname','$lastname','$address','$dob','$contact_number','$job_title','$gender','$profile_image','$description','$link','$tags')";
+        $query="INSERT INTO client(user_id,firstname,lastname,address,dob,contact_number,job_title,gender,image,description,url,tags) VALUES('$user_id','$firstname','$lastname','$address','$dob','$contact_number','$job_title','$gender','$profile_image','$description','$link','$tags')";
         
-        $update_profile=mysqli_query($connection,$query);                       // setting a variable to mysqli query
+        $create_profile=mysqli_query($connection,$query);                       // setting a variable to mysqli query
         
-        confirmQuery($update_profile);                                          // validation of mysqli query
+        confirmQuery($create_profile);                                          // validation of mysqli query
         
-        echo $message="<h6 class='alert alert-success'>Profile updated successfully. Click here to view your profile<a href='#? '>   View Profile</a></h6>";                                    // Alert user
+        echo $message="<h6 class='alert alert-success'>Profile created successfully. Click here to view your profile<a href='../profile_page/client_profile_page.php?p_id=$user_id'>   View Profile</a></h6>";                                    // Alert user
     
 }
 
 
 }
+
+
+
+// Method for editing client's profile
+function updateClientProfile($user_id,$firstname,$lastname,$address,$contact_number,$dob,$job_title,$gender, $description, $link, $tags,$profile_image){
+    
+    global $connection;             // declaring the $connection variable global
+    
+    if(!empty($firstname)&&!empty($lastname)&&!empty($address)&&!empty($gender)){   //checking parameters for empty string
+        
+        // cleaning of parameter to prevent mysql injections
+        $firstname=mysqli_real_escape_string($connection,$firstname);
+        $lastname=mysqli_real_escape_string($connection,$lastname);
+        $address=mysqli_real_escape_string($connection,$address);
+        $contact_number=mysqli_real_escape_string($connection,$contact_number);
+        $dob=mysqli_real_escape_string($connection,$dob);
+        $job_title=mysqli_real_escape_string($connection,$job_title);
+        $gender=mysqli_real_escape_string($connection,$gender);
+        $description=mysqli_real_escape_string($connection,$description);
+        $link=mysqli_real_escape_string($connection,$link);
+        $tags=mysqli_real_escape_string($connection,$tags);
+        $profile_image=mysqli_real_escape_string($connection,$profile_image);
+        
+        //preparing mysqli query for inserting into the database
+        $query="UPDATE client SET firstname='$firstname',lastname='$lastname',address='$address',dob='$dob',contact_number='$contact_number',job_title='$job_title',gender='$gender',image='$profile_image',description='$description',url='$link',tags='$tags',updatedAt=now() WHERE user_id={$user_id}";
+        
+        $update_profile=mysqli_query($connection,$query);                       // setting a variable to mysqli query
+        
+        confirmQuery($update_profile);                                          // validation of mysqli query
+        
+        echo $message="<h6 class='alert alert-success'>Profile updated successfully. Click here to view your profile<a href='../profile_page/client_profile_page.php?p_id=$user_id'>   View Profile</a></h6>";                                    // Alert user
+    
+}
+
+
+}
+
 
 
 
@@ -538,6 +613,45 @@ function updateJob($job_post_id,$client_id,$category,$title,$contract,$descripti
 }
 
 
+}
+
+
+
+function jobApplied($job_post_id,$client_id,$freelancer_id){
+    global $connection;
+    
+    if(!empty($job_post_id)&&!empty($freelancer_id)){
+      
+        $query="SELECT * FROM job_post WHERE job_post_id={$job_post_id}";
+        $check_status=mysqli_query($connection,$query);
+        confirmQuery($check_status);
+        while($row=mysqli_fetch_assoc($check_status)){
+            $status = $row['status'];
+        }
+        
+        
+        if($status==='open'){
+        $query="SELECT * FROM jobs_applied WHERE job_post_id={$job_post_id} AND freelancer_id={$freelancer_id} ";
+        $select_job=mysqli_query($connection,$query);
+        $count=mysqli_num_rows($select_job);
+        
+        if($count==0){
+            
+        $query= "INSERT INTO jobs_applied(job_post_id,client_id,freelancer_id,apply_date) VALUES('$job_post_id','$client_id','$freelancer_id',now())";
+        $apply_job=mysqli_query($connection,$query);
+        confirmQuery($apply_job); 
+            
+            echo "<h6 class='alert alert-success'>Job application accepted</h6>";
+          
+        }else{
+            echo "<h6 class='alert alert-danger'>Job application denied</h6>";
+        } 
+            
+        }else{
+            
+        }
+        
+    }
 }
 
 

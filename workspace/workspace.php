@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Jobsearch</title>
+	<title>Jobllery</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" href="images/jlogo.png">
@@ -12,7 +12,7 @@
 </head>
 
 <body>
- <?php include "../freelancer/includes/db.php";?>
+<?php include "../freelancer/includes/db.php";?>
 <?php include "../freelancer/includes/functions.php";?>
 		<!-- Navbar starts from here -->
 		<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
@@ -36,7 +36,7 @@
 
 			    <div class="uk-navbar-right linksandbuttons">
 			        <ul class="uk-navbar-nav">
-                    <?php
+                     <?php
                             if(isset($_SESSION['username'])){
                                 if($_SESSION['user_role']=='client'){
                                   echo '<li class="uk-active"><a href="../client/index.php">'.$_SESSION['username'].'</a></li>';   
@@ -51,15 +51,17 @@
 			            <li class="uk-active"><a href="../user_registration/login.php">LOG IN</a></li>
 			            <li class="uk-active"><a href="../user_registration/register.php">SIGN UP</a></li>
 			            <div class="uk-navbar-item">
-			                <button class="uk-button uk-button-default navbutton"><a class="btns" href="">Post a Job</a></button>
+			                <button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>
 			        	</div>
 			        </ul>
 			    </div>
 
-			</nav> <!-- Navbar ends here -->
+			</nav> 
 		</div>
-			
-    <?php
+
+		<!-- Navbar ends here -->
+		
+			    <?php
     
        if(isset($_GET['page'])){
                     $page = $_GET['page'];
@@ -104,46 +106,54 @@
         $createdAt = $row['createdAt'];
         
         
-        ?>
-  
+        ?>	
+
 	<!-- posted jobs  -->
 <div class="posts">
   <div class="row">
-  <a href="#">
+  <a href="../job_details/job_details.php?p_id=<?php echo $job_post_id; ?>&client_id=<?php echo $client_id; ?>">
 	  <div class="column">
 	    <img class="icon" src="../client/assets/img/dogs/<?php echo  $image; ?>">
-	    <div class="job"><h3><?php echo $job_title; ?></h3> <h4>Location: <?php echo $location;?></h4> <h5>Job duration: <?php echo $job_duration;?></h5></div>
-	    <div class="tags"> <h5>Requirement</h5>
-	       <div class="taglist"><?php echo $tags; ?></div>
-	       
+	    <div class="job"><h3><?php echo $job_title; ?></h3> <h4>Location: <?php echo $location;?></h4> <h5>Job duration: <?php echo $job_duration;?></h5>
 	    </div>
+	    <div class="tags">
+	     <h5>Requirement</h5> 
+	     <div class="taglist"><?php echo $tags; ?></div>
+	      </div> 
 	    <div class="amount"><h3 class="price">$<?php echo $offered_salary; ?></h3></div>
 	  </div>
-    </a>
-            
-            <?php  }
+     </a>
+	</div>
+ 
+
+ </div>
+
+<?php  }
  
             ?>
+<!-- pagination -->
 
-	</div>
-<br>
-   
-<ul class="pager">
+ <ul class="uk-pagination uk-flex-center" uk-margin>
         <?php
             for($i=1; $i<=$count_post; $i++){
               
                   
                 if($i==$page){
+                //echo "<li><a href='workspace.php?page=$i'><span uk-pagination-previous></span></a></li>";
+                echo "<li><a class='uk-active' href='workspace.php?page=$i'>$i</a></li>";
                 
-                    echo "<li><a class='active_link' href='workspace.php?page=$i'>$i</a></li>";
                }else{
-                echo "<li><a href='workspace.php?page=$i'>$i</a></li>";   
+                echo "<li><a href='workspace.php?page=$i'>$i</a></li>"; 
+                //echo "<li><a href='workspace.php?page=$i'><span uk-pagination-next></span></a></li>";
                }
             }
             ?>
             
-        </ul>
- </div>
+</ul>
+<!--
+
+<!-- pagination -->
+
 	<!-- posted jobs end -->
 
  	  <!-- before footer -->
@@ -226,7 +236,7 @@
 	<script src="https://kit.fontawesome.com/b9b0ceea14.js" crossorigin="anonymous"></script>
 
     <!-- link to jQuery -->
-   <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- link to uikit js -->
 	<script type="text/javascript" src="js/jobsearch.min.js"></script>

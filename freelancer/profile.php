@@ -7,8 +7,8 @@
                 <div class="joblllery-logo"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.php"></a></div>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link active" href="profile.php"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
-                            href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a><a class="nav-link" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Jobs</strong></span></a>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link active" href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
+                            href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a><a class="nav-link" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Awarded Jobs</strong></span></a>
                         <a
                             class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong></span></a>
                             <a
@@ -22,8 +22,9 @@
 <?php include "includes/dashboard_navigation.php";?>
             <div class="container-fluid profile">
                 <div class="profile-container">
-                    <h3 class="header"><strong>Profile</strong></h3>
-                     <?php
+                    <h3 class="header"><strong>Create Profile</strong></h3>
+                    
+                    <?php
                         //When the save profile button is pressed a block of code runs
                         if(isset($_POST['submit'])){
                             
@@ -34,7 +35,7 @@
                             $contact_number = trim($_POST['contact_number']);
                             $experience = trim($_POST['experience']);
                             $dob = trim($_POST['dob']);
-                            $job_title = trim($_POST['job_title']);
+                            
                             $gender = trim($_POST['gender']);
                             $qualification = trim($_POST['qualification']);
                             $description = trim($_POST['description']);
@@ -42,6 +43,7 @@
                             $tags = trim($_POST['tags']);
                             $profile_image = $_FILES['image']['name'];
                             $profile_temp_image = $_FILES['image']['tmp_name'];
+                            $user_id = $_SESSION['user_id'];
                             
                             //move the file from a temproary location to the designated variable
                             move_uploaded_file($profile_temp_image, "assets/img/dogs/$profile_image");
@@ -84,7 +86,7 @@
                             if(empty($error)){
                             
                             //invocation of updateClientProfile method
-                             updateProfile($firstname,$lastname,$address,$contact_number,$experience,$dob,$job_title,$gender,$qualification, $description, $link, $tags,$profile_image); 
+                             createProfile($user_id,$firstname,$lastname,$address,$contact_number,$experience,$dob,$gender,$qualification, $description, $link, $tags,$profile_image); 
                            
                                 
                             
@@ -126,9 +128,11 @@
                                 <div class="form-group"><label>Date of Birth</label>
                                 <input class="form-control" type="date" name="dob">
                                 </div>
+<!--
                                 <div class="form-group"><label>Job Title</label>
                                 <input class="form-control" type="text" name="job_title">
                                 </div>
+-->
                                 <div class="form-group">
                                 <label for="gender">Gender
                                 <select class="form-control" name="gender">

@@ -7,10 +7,17 @@
 	padding-left: 20%;
 }
 
+  /*jobllery logo at the upper left*/
 .sitelogo {
 	width: 122px;
 	height: 37px;
+	transition: 0.5s;
 }
+
+.sitelogo:hover {
+	transform: scale(0.5, 0.5);
+}
+ 		/*End*/
 
 .navbutton{
 	background-color: #00D820;
@@ -132,8 +139,8 @@ h3, h4, h5 {
 }
 
 .footer {
-	padding-left: 10%;
-	padding-right: 10%;
+	padding-left: 5%;
+	padding-right: 5%;
 	padding-top: 20px;
 }
 
@@ -149,7 +156,7 @@ h3, h4, h5 {
 	border-bottom: 1px solid white;
 	position: relative;
 	top: 250px;
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 }
 
@@ -163,7 +170,7 @@ footer {
 
 
 .footer_content {
-	padding-left: 10%;
+	padding-left: 5%;
 	padding-top: 5px;
 }
 
@@ -213,7 +220,7 @@ h2 a:hover {
 }
 
 .sm_links {
-	padding-left: 100px;
+	padding-left: 200px;
 }
 
 .sm_links a{
@@ -227,6 +234,17 @@ h2 a:hover {
 	transform: rotate(360deg);
 }
 
+/* On screens that are 1178px or less */
+@media screen and (max-width:1178px) {
+ .sm_links {
+	padding-left: 100px;
+}
+
+.address {
+	font-size: 14px;
+}
+
+}
 
 
 /* On screens that are 992px or less */
@@ -305,6 +323,10 @@ footer {
 	font-size: 0.8em !important;
 }
 
+.sm_links {
+	padding-left: 100px;
+}
+
 .sm_links a{
 	padding: 0px 5px;
 }
@@ -322,56 +344,6 @@ footer {
 /* On screens that are 799px or less */
 @media screen and (max-device-width: 799px){
 
-.linksandbuttons {
-	display: none;
-}
-
-.icon {
-	width: 15%;
-}
-
-.job {
-	width: 40%;
-}
-
-.amount {
-	width: 10%;
-}
-
-.tags {
-	width: 30%;
-}
-
-.job h3 {
-	padding-top: 15px;
-	font-size: 18px;
-}
-
-.job h4 {
-	font-size: 15px;
-}
-
-.job h5 {
-	font-size: 12px;
-}
-
-.tags h5 {
-	font-size: 15px;
-}
-
-.taglist {
-	font-size: 12px;
-	margin-top: 2px;
-}
-
-.tags h5 {
-	padding-top: 20px;
-}
-
-.posts {
-	padding-left: 2.5%;
-}
-
 .for_mobile {
 	float: none;
 	display: inline;
@@ -380,10 +352,110 @@ footer {
 
 .footer_content {
 	padding-left: 5%;
+	padding-right: 5%;
 }
 
 .log_sm { 
 	width: 25% !important;
 }
 
+.address {
+		display: block;
+	}
+
+.sm {
+		margin-top: 20px;
+		float: right;
+		padding: 0px 5px;
+	}
+
+.log_sm img {
+		margin-top: 10px;
+	}
+}
+
+
+/* On screens that are 669px or less */
+@media screen and (max-device-width: 669px){
+	.linksandbuttons {
+		display: none;
+	}
+
+	.icon {
+	width: 10%;
+	}
+
+.job {
+	width: 50%;
+	}
+
+.amount {
+	width: 10%;
+	}
+
+.tags {
+	width: 30%;
+	}
+
+
+.job h3 {
+	padding-top: 20px;
+	font-size: 15px;
+	}
+
+.job h4 {
+	font-size: 14px;
+	}
+
+.tags h5 {
+	font-size: 14px;
+	}
+
+.tags h5 {
+	padding-top: 15px;
+	}
+
+.taglist {
+	font-size: 12px;
+	}
+
+.price{
+	font-size: 14px;
+	padding-top: 45px;
+	}
+
+}
+
+
+/* On screens that are 499px or less */
+@media screen and (max-device-width: 499px){
+
+	.footer {
+		float: none;
+		display: inline-block;
+	}
+
+	.log_sm img {
+		display: none;
+	}
+
+	.sm {
+		margin-top: 20px;
+		float: right;
+		padding: 0px 5px;
+	}
+
+	.address {
+		display: block;
+		text-align: center;
+	}
+}
+
+
+/* On screens that are 499px or less */
+@media screen and (max-device-width: 420px){
+	.searchbox {
+		height: 25px !important;
+		margin: 0 auto !important;
+	}
 }
