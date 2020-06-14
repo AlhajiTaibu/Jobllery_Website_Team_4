@@ -18,7 +18,7 @@
 		<nav class="uk-navbar-container navibar" uk-navbar>
 			<div class="uk-navbar-left">
 				<ul class="uk-navbar-nav">
-				<li class="uk-active sitename" ><a href="../client/index.php"><img class="sitelogo" src="images/jlogo.png"></a></li>
+				<li class="uk-active sitename" ><a href="../Homepage/index.php"><img class="sitelogo" src="images/jlogo.png"></a></li>
 				</ul>
 			</div>
             <?php
@@ -93,9 +93,9 @@
 						<img src="../client/assets/img/dogs/<?php echo $image;?>">
 						<button onclick="myFunction()" class="dropbtn"><?php echo $first_name. " ". $last_name;?> &#9660</button>
 						<div id="myDropdown" class="dropdown-content">
-							<a href="#"><i class="fas fa-user-alt"></i>Profile</a>
+							<a href="../client/index.php"><i class="fas fa-user-alt"></i>Dashboard</a>
 							<a href="../client/edit_profile.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-cogs"></i>Edit Profile</a>
-							<a href="#"><i class="fas fa-list"></i>Activity Log</a>
+<!--							<a href="#"><i class="fas fa-list"></i>Activity Log</a>-->
 							<a href="../user_registration/logout.php"><i class="fas fa-sign-out-alt"></i>Log out</a>
 						</div>
 					</div>
@@ -124,16 +124,22 @@
 				<h6>Rating 4.0</h6>
 			</div>
 			<div class="picAbout">
-				<img src="../freelancer/assets/img/dogs/<?php echo $image;?>">
-				<button class="uk-button uk-button-default navbutton"><a class="btns" href="">Follow <?php echo $first_name;?></a></button>	
+				<img src="../client/assets/img/dogs/<?php echo $image;?>">
+				<button class="uk-button uk-button-default navbutton"><a class="btns" href=""><?php echo $first_name;?></a></button>	
 				<div class="aboutMe">
 					<h4>ABOUT</h4>
-				  <span class="content"><?php echo $description;?><a href="#">See more</a> </span>
+				  <span class="content"><?php echo $description;?> </span>
 				</div>
-
+                <?php
+                        $query="SELECT * FROM job_post WHERE client_id={$_SESSION['user_id']} ORDER BY createdAt DESC"; 
+                        $select_job_by_client = mysqli_query($connection,$query);
+                        confirmQuery($select_job_by_client);          
+                        $count = mysqli_num_rows($select_job_by_client);
+                
+                ?>
 				<div class="followers">
-				<h5>Followers</h5> <h6>100</h6> <br>
-				<h5>Jobs Completed</h5> <h6>89</h6>
+				<h5>Followers</h5> <h6><a href="<?php echo $url ;?>"><?php echo $url ;?></a></h6> <br>
+				<h5>Jobs Posted</h5> <h6><?php echo $count; ?></h6>
 				</div>
 
 				
@@ -143,6 +149,7 @@
 
 
 	<!-- works slideshow -->
+<!--
 <div class="workSlideshow">
 	<h4>Works</h4>
 	<div class="uk-cover-container slideContainer">
@@ -166,26 +173,55 @@
 	    </div>
 	</div>	
 </div>
+-->
 				
 		<!-- works slideshow ends-->
 
 
 		<!-- jobs completed section -->
+		
+		
+		
 <div class="posts">
-	<h4 class="completed">Jobs Completed</h4>
+	<h4 class="completed">Jobs Posted</h4>
 	<div class="row">
+	
+                        <?php     
+                        
+
+                        while($row=mysqli_fetch_assoc($select_job_by_client)){
+                        $job_post_id = $row['job_post_id'];
+                        $client_id = $row['client_id'];
+                        $category_id = $row['category_id'];
+                        $job_title = $row['job_title'];
+                        $contract_type = $row['contract_type'];
+                        $job_description = $row['job_description'];
+                        $application_deadline_date = $row['application_deadline_date'];
+                        $required_skills =$row['required_skills'];
+                        $min_salary = $row['min_salary'];
+                        $max_salary = $row['max_salary'];
+                        $salary_type = $row['salary_type'];
+                        $tags = $row['tags'];
+                        $offered_salary = $row['offered_salary'];
+                        $job_duration = $row['job_duration'];
+                        $experience = $row['experience'];
+                        $image = $row['image'];
+                        $location = $row['location'];
+                        $createdAt = $row['createdAt'];
+                        $status = $row['status'];
+                        ?>
+
 		<div class="column">
 			<img class="icon" src="images/icon.png">
-			<div class="job"><h3>Logo Design</h3> <h4>Accra, Ghana</h4> <h5>Estimated Time: 3 - 8 days</h5></div>
-			<div class="tags"> <h5>Requirement</h5> <div class="taglist">PhP</div> <div class="taglist">Angular</div> <div class="taglist">Perl</div> </div>
-			<div class="amount"><h3 class="price">$100</h3></div>
+			<div class="job"><h3><?php echo $job_title;?></h3> <h4><?php echo  $location; ?></h4> <h5><?php echo $job_duration; ?></h5></div>
+			<div class="tags"> <h5>Requirement</h5> 
+			<div class="taglist"><?php echo $tags; ?></div> 
+			
+			 </div>
+			
+			<div class="amount"><h3 class="price"> $<?php echo $offered_salary; ?></h3></div>
 		</div>
-		<div class="column">
-			<img class="icon" src="images/icon.png">
-			<div class="job"><h3>Android Development</h3> <h4>Accra, Ghana</h4> <h5>Estimated Time: 1 - 2 months</h5></div>
-			<div class="tags"> <h5>Requirement</h5> <div class="taglist">PhP</div> <div class="taglist">Angular</div> <div class="taglist">Perl</div> </div>
-			<div class="amount"><h3 class="price">$4000</h3></div>
-		</div>
+		<?php }?>
 	</div>
 </div>
 

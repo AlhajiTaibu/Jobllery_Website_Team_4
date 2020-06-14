@@ -26,10 +26,12 @@
 
 			    <!-- search bar -->
 			<div class="uk-margin">
+<!--
 			    <form class="uk-search uk-search-default searchbar">
 			        <a href="" class="uk-search-icon-flip" uk-search-icon></a>
 			        <input class="uk-search-input searchbox" type="search" placeholder="Search Job...">
 			    </form>
+-->
 			</div>
 			   <!--  search bar ends -->
 
@@ -48,10 +50,37 @@
                                
                             }
                         ?>
+                         <?php
+                           
+                                if($_SESSION['username']){
+                                
+                                   
+                                }else{
+                                   echo '<li class="uk-active"><a href="../user_registration/login.php">LOG IN</a></li>';  
+                                   echo '<li class="uk-active"><a href="../user_registration/register.php">SIGN UP</a></li>'; 
+                                }
+                               
+                           
+                        ?>
+<!--
 			            <li class="uk-active"><a href="../user_registration/login.php">LOG IN</a></li>
 			            <li class="uk-active"><a href="../user_registration/register.php">SIGN UP</a></li>
+-->
 			            <div class="uk-navbar-item">
-			                <button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>
+                         <?php
+                            if(isset($_SESSION['username'])){
+                                if($_SESSION['user_role']=='client'){
+                                  echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../client/submit_job.php">Post a Job</a></button>';   
+                                }elseif($_SESSION['user_role']=='freelancer'){
+                                  
+                                }
+                               
+                            }else{
+                                 echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>';                                  
+
+                            }
+                        ?>
+<!--			                <button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>-->
 			        	</div>
 			        </ul>
 			    </div>
@@ -60,8 +89,7 @@
 		</div>
 
 		<!-- Navbar ends here -->
-		
-			    <?php
+		<?php
     
        if(isset($_GET['page'])){
                     $page = $_GET['page'];
@@ -113,7 +141,23 @@
   <div class="row">
   <a href="../job_details/job_details.php?p_id=<?php echo $job_post_id; ?>&client_id=<?php echo $client_id; ?>">
 	  <div class="column">
-	    <img class="icon" src="../client/assets/img/dogs/<?php echo  $image; ?>">
+        <?php
+          
+          if($image==""){
+              
+              echo "<img class='icon' src='../client/assets/img/dogs/icon.png'>";
+             
+          }else{
+              
+              echo "<img class='icon' src='../client/assets/img/dogs/{$image}'>";
+              //echo "<img class='icon' src='../client/assets/img/dogs/'.$image.'>";
+              
+          }
+          
+          ?>
+    
+    
+<!--	    <img class="icon" src="../client/assets/img/dogs/<?php echo  $image; ?>">-->
 	    <div class="job"><h3><?php echo $job_title; ?></h3> <h4>Location: <?php echo $location;?></h4> <h5>Job duration: <?php echo $job_duration;?></h5>
 	    </div>
 	    <div class="tags">

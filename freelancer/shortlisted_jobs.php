@@ -10,19 +10,20 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
                             href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a><a class="nav-link active" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Awarded Jobs</strong></span></a>
                         <a
-                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong></span></a>
+                            class="nav-link" href="browse_jobs.php"><i class="fas fa-info"></i><span><strong>Browse Jobs</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong></span></a>
                             <a
                                 class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
                     </li>
                    
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+<!--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
             </div>
         </nav>
 <?php include "includes/dashboard_navigation.php";?>
             <div class="container-fluid profile">
                 <div class="profile-container">
                     <h4 class="header"><strong>Awarded Jobs</strong></h4>
+<!--
                     <form>
                         <div class="form-row" id="row-style">
                             <div class="col-12 offset-0 col-md-6 col-sm-9 col-xs-12 col-lg-4" id="forms">
@@ -36,25 +37,25 @@
                             </div>
                         </div>
                     </form>
+-->
                     <div class="container-fluid">
                         <div class="table-responsive table-borderless" id="table-background">
                             <table class="table">
+<!--
                                 <thead class="table table-bordered">
                                
                                
-                                    
-                                 
-                                   
                                     <tr>
                                         <th>Job Logo</th>
                                         <th>Job Details</th>
                                         <th>Status</th>
-<!--                                        <th>Times</th>-->
+                                        <th>Times</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+-->
                                 <tbody>
-                                       <?php
+                                 <?php
                                     $query= "SELECT * FROM jobs_applied WHERE freelancer_id={$_SESSION['user_id']} AND status='awarded' ORDER BY apply_date DESC";
                                     $select_freelancer_job=mysqli_query($connection,$query);
                                     confirmQuery($select_freelancer_job);
@@ -118,7 +119,9 @@
                                         </td>
                                         <td class="table-data"><?php echo $status; ?></td>
 <!--                                        <td class="table-data">Daily</td>-->
-                                        <td class="table-data"><i class="icon ion-android-delete trash"></i></td>
+                                        <td class="table-data">
+<!--                                        <i class="icon ion-android-delete trash"></i>-->
+                                        </td>
                                     </tr>
                                <?php  }
                                     ?>

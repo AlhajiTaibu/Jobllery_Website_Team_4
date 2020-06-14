@@ -18,7 +18,7 @@
 		<nav class="uk-navbar-container navibar" uk-navbar>
 			<div class="uk-navbar-left">
 				<ul class="uk-navbar-nav">
-				<li class="uk-active sitename" ><a href="../freelancer/index.php"><img class="sitelogo" src="images/jlogo.png"></a></li>
+				<li class="uk-active sitename" ><a href="../Homepage/index.php"><img class="sitelogo" src="images/jlogo.png"></a></li>
 				</ul>
 			</div>
             
@@ -96,19 +96,21 @@
                             if($_SESSION['user_role']=='freelancer'){
                              
                             ?>
-                            
+                            <a href="../freelancer/index.php"><i class="fas fa-cogs"></i>Dashboard</a>
                             <a href="../freelancer/edit_profile.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-cogs"></i>Edit Profile</a>
-                            
+                            <a href="../user_registration/logout.php"><i class="fas fa-sign-out-alt"></i>Log out</a>
                             <?php
                             
                             }else{
                               ?>  
-                                <a href="../client/index.php"><i class="fas fa-cogs"></i>Dashboard</a>
+                                <a href="../client/index.php"><i class="fas fa-cogs"></i>To Client Dashboard</a>
                         <?php    }
                             
                             ?>
-							<a href="#"><i class="fas fa-list"></i>Activity Log</a>
-							<a href="#"><i class="fas fa-sign-out-alt"></i>Log out</a>
+<!--							<a href="#"><i class="fas fa-list"></i>Activity Log</a>-->
+                        
+                        
+						
 						</div>
 					</div>
 				</ul>
@@ -137,15 +139,15 @@
 			</div>
 			<div class="picAbout">
 				<img src="../freelancer/assets/img/dogs/<?php echo $image;?>">
-				<button class="uk-button uk-button-default navbutton"><a class="btns" href="">Follow <?php echo $first_name;?></a></button>	
+				<button class="uk-button uk-button-default navbutton"><a class="btns" href=""><?php echo $first_name;?></a></button>	
 				<div class="aboutMe">
 					<h4>ABOUT</h4>
-				  <span class="content"><?php echo $description;?><a href="#">See more</a> </span>
+				  <span class="content"><?php echo $description;?></span>
 				</div>
 
 				<div class="followers">
-				<h5>Followers</h5> <h6>100</h6> <br>
-				<h5>Jobs Completed</h5> <h6>89</h6>
+				<h5>Link: </h5> <h6><a href="<?php echo $url ;?>"><?php echo $url ;?></a></h6> <br>
+				<h5>Jobs Completed</h5> <h6></h6>
 				</div>
 
 				
@@ -155,7 +157,8 @@
 
 
 	<!-- works slideshow -->
-<div class="workSlideshow">
+<!--<div class="workSlideshow">-->
+<!--
 	<h4>Works</h4>
 	<div class="uk-cover-container slideContainer">
 	    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true; pause-on-hover: true" >
@@ -177,7 +180,8 @@
 
 	    </div>
 	</div>	
-</div>
+-->
+<!--</div>-->
 				
 		<!-- works slideshow ends-->
 

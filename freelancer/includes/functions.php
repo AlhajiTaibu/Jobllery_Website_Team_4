@@ -203,7 +203,7 @@ function login_user($email,$password){
     $_SESSION['user_role'] = $db_user_role;
     $_SESSION['user_id'] =  $db_user_id;
     
-    header("Location:../client/profile.php");              // Redirecting the user to the client dashboard if condition is true
+    header("Location:../client/index.php");              // Redirecting the user to the client dashboard if condition is true
       
     }
         
@@ -215,7 +215,7 @@ function login_user($email,$password){
     $_SESSION['user_role'] = $db_user_role;
     $_SESSION['user_id'] =  $db_user_id;
     
-    header("Location:../freelancer/profile.php");      // Redirecting the user to the freelancer dashboard if condition is true
+    header("Location:../freelancer/index.php");      // Redirecting the user to the freelancer dashboard if condition is true
   
     }
     }
@@ -560,14 +560,32 @@ function postJob($client_id,$category,$title,$contract,$description,$deadline,$r
         $profile_image=mysqli_real_escape_string($connection,$profile_image);
         $location=mysqli_real_escape_string($connection,$location);
         
-        //preparing mysqli query for inserting into the database
-        $query="INSERT INTO job_post(client_id,category_id,job_title,contract_type,job_description,application_deadline_date,required_skills,min_salary,max_salary,salary_type,tags,offered_salary,job_duration,experience,image,location) VALUES('$client_id','$category',' $title','$contract','$description','$deadline','$required_skill','$min_salary','$max_salary','$salary_type','$tags','$offered_salary','$duration','$experience','$profile_image','$location')";
+        
+        $query="SELECT * FROM client WHERE user_id={$client_id}";
+        $select_profile=mysqli_query($connection,$query);
+        confirmQuery($select_profile);
+        $count=mysqli_num_rows($select_profile);
+        
+        if($count>0){
+            
+            //preparing mysqli query for inserting into the database
+        $query="INSERT INTO job_post(client_id,category_id,job_title,contract_type,job_description,application_deadline_date,required_skills,min_salary,max_salary,salary_type,tags,offered_salary,job_duration,experience,image,location,status,createdAt) VALUES('$client_id','$category',' $title','$contract','$description','$deadline','$required_skill','$min_salary','$max_salary','$salary_type','$tags','$offered_salary','$duration','$experience','$profile_image','$location','open',now())";
        
         $post_job=mysqli_query($connection,$query);                   // setting a variable to mysqli query
         
         confirmQuery($post_job);                                      // validation of mysqli query
         
-       echo $message="<h6 class='alert alert-success'>Job submitted successfully. Click here to view your job post<a href='#? '>   View Jobs</a></h6>";                                 // Alert user
+        $last_id = mysqli_insert_id($connection);
+        
+        
+        
+       echo $message="<h6 class='alert alert-success'>Job submitted successfully. Click here to view your job post<a href='../job_details/job_details.php?p_id=$last_id '>   View Jobs</a></h6>";                                 // Alert user
+        
+        }else{
+          echo $message="<h6 class='alert alert-warning'>Please, kindly update your profile. <a href='profile.php'>   Update Profile</a></h6>";  
+        }
+        
+        
     
 }
 
@@ -618,10 +636,20 @@ function updateJob($job_post_id,$client_id,$category,$title,$contract,$descripti
 
 
 function jobApplied($job_post_id,$client_id,$freelancer_id){
+    
     global $connection;
     
     if(!empty($job_post_id)&&!empty($freelancer_id)){
-      
+        
+        
+        $query="SELECT * FROM profile WHERE user_id={$freelancer_id}";
+        $select_freelancer=mysqli_query($connection,$query);
+        confirmQuery($select_freelancer);
+        $count=mysqli_num_rows($select_freelancer);
+        
+        if($count>0){
+          
+                    
         $query="SELECT * FROM job_post WHERE job_post_id={$job_post_id}";
         $check_status=mysqli_query($connection,$query);
         confirmQuery($check_status);
@@ -638,18 +666,28 @@ function jobApplied($job_post_id,$client_id,$freelancer_id){
         if($count==0){
             
         $query= "INSERT INTO jobs_applied(job_post_id,client_id,freelancer_id,apply_date) VALUES('$job_post_id','$client_id','$freelancer_id',now())";
+        
         $apply_job=mysqli_query($connection,$query);
         confirmQuery($apply_job); 
             
             echo "<h6 class='alert alert-success'>Job application accepted</h6>";
           
         }else{
+            
             echo "<h6 class='alert alert-danger'>Job application denied</h6>";
         } 
             
         }else{
             
+            echo "<h6 class='alert alert-info'>Job application is closed</h6>"; 
         }
+            
+        }else{
+            
+            echo "<h6 class='alert alert-warning'>Please, update your profile <a href='profile.php'>   Update Profile</a></h6>"; 
+        }
+        
+
         
     }
 }

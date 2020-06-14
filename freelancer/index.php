@@ -1,5 +1,5 @@
 <?php include "includes/dashboard_header.php";?>
-   <?php include "includes/db.php";?>
+<?php include "includes/db.php";?>
 <?php include "includes/functions.php";?>
     <div id="wrapper">
         <nav class="navbar navbar-dark fixed-top align-items-start sidebar sidebar-dark accordion bg-gradient-success p-0" id="sidebar-color">
@@ -12,12 +12,12 @@
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="index.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a><a class="nav-link" href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user-alt"></i><span><strong>Profile</strong></span></a><a class="nav-link"
                             href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a><a class="nav-link" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Awarded Jobs</strong></span></a>
                         <a
-                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notifications</strong><br></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong><br></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong><br></span></a>
+                            class="nav-link" href="browse_jobs.php"><i class="fas fa-info"></i><span><strong> Browse Jobs</strong><br></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong><br></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong><br></span></a>
                             <a
                                 class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
                     </li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+<!--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
             </div>
         </nav>
 <?php include "includes/dashboard_navigation.php";?>
@@ -27,6 +27,27 @@
                 </div>
               
                 <div class="row">
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <a href="browse_jobs.php">
+                        <div class="card shadow border-bottom-success py-2">
+                            <div class="card-body" id="index-card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-dark font-weight-bold h5 mb-0"></div>
+                                    </div>
+                                </div>
+                                <?php
+                                 $query= "SELECT * FROM job_post";
+                                $count_query= mysqli_query($connection,$query);
+                                $count_post=mysqli_num_rows($count_query);
+                                
+                                ?>
+                                <h3><strong><?php echo $count_post; ?></strong></h3>
+                                <h6>Jobs<br></h6>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
                     <div class="col-md-6 col-xl-3 mb-4">
                         <a href="jobs_applied.php">
                            <div class="card shadow border-bottom-success py-2">
@@ -69,7 +90,9 @@
                         </div>
                         </a>
                     </div>
+                   
                     <div class="col-md-6 col-xl-3 mb-4">
+                       <a href="following_employers.php"> 
                         <div class="card shadow border-bottom-success py-2">
                             <div class="card-body" id="index-card-body">
                                 <div class="row align-items-center no-gutters">
@@ -77,21 +100,15 @@
                                         <div class="text-dark font-weight-bold h5 mb-0"></div>
                                     </div>
                                 </div>
-                                <h3><strong>0</strong></h3>
-                                <h6>Review<br></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-bottom-success py-2">
-                            <div class="card-body" id="index-card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-dark font-weight-bold h5 mb-0"></div>
-                                    </div>
-                                </div>
-                                <h3><strong>25</strong></h3>
-                                <h6>Views<br></h6>
+                                 <?php
+                                $query="SELECT * FROM client ";
+                                $select_client=mysqli_query($connection,$query);
+                                confirmQuery($select_client);
+                                $count = mysqli_num_rows($select_client);
+                                ?>
+                                <h3><strong><?php echo $count; ?></strong></h3>
+                                <h6>Employers<br></h6>
+                                </a>
                             </div>
                         </div>
                     </div>

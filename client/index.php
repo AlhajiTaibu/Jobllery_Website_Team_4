@@ -9,15 +9,22 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a><a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user-alt"></i><span><strong>Profile</strong></span></a><a class="nav-link"
-                            href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a><a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a><a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user-alt"></i><span><strong>Profile</strong></span></a>
+                     <a class="nav-link" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>      
+<!--                    <a class="nav-link" href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a>-->
+                    <a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
+<!--
                         <a
-                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notifications</strong><br></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong><br></span></a><a class="nav-link" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>
-                            <a
-                                class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
+                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notifications</strong><br></span></a>
+-->
+                            <a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong><br></span></a>
+                            
+                            
+                            <a class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
                     </li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                
+<!--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
             </div>
         </nav>
 <?php include "includes/navigation.php";?>
@@ -27,7 +34,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-bottom-success py-2">
+                      <a href="my_jobs.php">  
+                           <div class="card shadow border-bottom-success py-2">
                             <div class="card-body" id="index-card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col mr-2">
@@ -46,10 +54,12 @@
                                 <h6>Posted Jobs<br></h6>
                             </div>
                         </div>
+                        </a>
                     </div>
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-bottom-success py-2">
-                            <div class="card-body" id="index-card-body">
+                            <a href="shortlisted_candidates.php">
+                               <div class="card-body" id="index-card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col mr-2">
                                         <div class="text-dark font-weight-bold h5 mb-0"></div>
@@ -66,8 +76,10 @@
                                 <h3><strong><?php echo $number_of_shortlisted; ?></strong></h3>
                                 <h6>Shortlisted<br></h6>
                             </div>
+                            </a>
                         </div>
                     </div>
+<!--
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-bottom-success py-2">
                             <div class="card-body" id="index-card-body">
@@ -94,6 +106,7 @@
                             </div>
                         </div>
                     </div>
+-->
                     <div class="col">
                         <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
                     </div>

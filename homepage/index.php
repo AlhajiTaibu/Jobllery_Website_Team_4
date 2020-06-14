@@ -50,13 +50,51 @@
                                
                             }
                         ?>
-			            <li class="uk-active"><a href="../user_registration/login.php">LOG IN</a></li>
-			            <li class="uk-active"><a href="../user_registration/register.php">SIGN UP</a></li>
+                        
+                        <?php
+                           
+                                if($_SESSION['username']){
+                                
+                                   
+                                }else{
+                                   echo '<li class="uk-active"><a href="../user_registration/login.php">LOG IN</a></li>';  
+                                   echo '<li class="uk-active"><a href="../user_registration/register.php">SIGN UP</a></li>'; 
+                                }
+                               
+                           
+                        ?>
+
 			            <div class="uk-navbar-item">
-			                <button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>
+                         <?php
+                            if(isset($_SESSION['username'])){
+                                if($_SESSION['user_role']=='client'){
+                                  echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../client/submit_job.php">Post a Job</a></button>';   
+                                }elseif($_SESSION['user_role']=='freelancer'){
+                                  
+                                }
+                               
+                            }else{
+                                 echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>';                                  
+
+                            }
+                        ?>
+			                
 			        	</div>
 			             <div class="uk-navbar-item">
-			                <button class="uk-button uk-button-default navbutton1"><a class="btns" href="../workspace/workspace.php">Browse Jobs</a></button>
+                         <?php
+                            if(isset($_SESSION['username'])){
+                                if($_SESSION['user_role']=='client'){
+                                    
+                                }elseif($_SESSION['user_role']=='freelancer'){
+                                  echo '<button class="uk-button uk-button-default navbutton1"><a class="btns" href="../workspace/workspace.php">Browse Jobs</a></button>';
+                                }
+                               
+                            }else{
+                                 echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../workspace/workspace.php">Browse Job</a></button>';                                  
+
+                            }
+                        ?>
+			                
 			        	</div>
 			        </ul>
 			    </div>
@@ -70,24 +108,35 @@
 
 	        		          <!--   dynamic search box -->
 	<div class="searchBox">
-		<form action="#" method="#">
-			<button class="find findJob">Find a Job</button> <button class="find findClient"> Find Client</button> <br>
+		<form action="../workspace/workspace_search.php" method="post">
+<!--			<button class="find findJob">Find a Job</button>-->
+			<input type="text" class="find findJob" value="Find a Job">
+<!--			 <button class="find findClient"> Find Client</button>-->
+			  <br>
 		  <input type="text" class="tBox" id="job" 	name="job" placeholder="eg. Graphic Designer">
-		  <select class="select" id="cat">
-			<option>Category</option>
-			<option>Graphic Designing</option>
-			<option>Digital Marketing</option>
-			<option>Programming & Tech.</option>
-			<option>Video & Animation</option>
-			<option>Lifestyle</option>	
-			<option>Music & Audio</option>
-			<option>Writing & Translation</option>
-			<option>Business</option>
+		  <select class="select" id="cat" name="category_name">
+		  <option value="">Category</option>
+             <?php
+              
+              $query="SELECT * FROM category";
+              $select_category=mysqli_query($connection,$query);
+              confirmQuery($select_category);
+              
+              while($row=mysqli_fetch_assoc($select_category)){
+                  $cat_id = $row['id'];
+                  $category_name = $row['category_name'];
+                  echo "<option value='{$cat_id}'>".$category_name."</option>";
+              }
+              
+              ?>
+			
+			
 		  </select>
-		  <input type="text" class="tBox" id="loc"  name="location" placeholder="location">
-		  <input class="search" type="submit" name="Search" value="Search">
+<!--		  <input type="text" class="tBox" id="loc"  name="location" placeholder="location">-->
+		  <input class="search" type="submit" name="search" value="Search">
 
-			 <div class="forClient">
+<!--			 <div class="forClient">-->
+<!--
 				  <input type="text" class="tBox" id="job" 	name="job" placeholder="eg. Godsway Nyatoame">
 				  <select class="select" id="cat">
 					<option>Category</option>
@@ -100,9 +149,12 @@
 					<option>Writer</option>
 					<option>Software Tester</option>
 				  </select>
+-->
+<!--
 				  <input type="text" class="tBox" id="loc"  name="location" placeholder="location">
 		  		  <input class="search" type="submit" name="Search" value="Search">
-			 </div>
+-->
+<!--			 </div>-->
 
 		</form>
 	</div>
@@ -154,64 +206,96 @@
        		<div uk-scrollspy="cls:uk-animation-slide-bottom; delay: 300; repeat:true;" class="cat_one">
        			<div class="graph">
        				<div class="innerbox">
-		       			<a href="#"><img src="images/graphics.svg"></a>
+<!--		       			<a href="../workspace/workspace_category.php?c_id=3">-->
+		       			<img src="images/graphics.svg">
+<!--		       			</a>-->
        				</div>
-       					<a href="#"> Graphic Designing </a> 
+<!--       					<a href="#">-->
+       					 Graphic Designing 
+<!--       					 </a> -->
        			</div>
 
        			<div class="graph">
        				<div class="innerbox">
-		       			<a href="#"><img src="images/lifestyle.svg"></a>	
+<!--		       			<a href="#">-->
+		       			<img src="images/lifestyle.svg">
+<!--		       			</a>	-->
        				</div>
-       				<a href="#"> Lifestyle </a>
+<!--       				<a href="#">-->
+       				 Lifestyle 
+<!--       				 </a>-->
        			</div>
        		</div>
        		
        		<div uk-scrollspy="cls:uk-animation-slide-top; delay: 300; repeat:true;" class="cat_one">
        			<div class="graph">
        				<div class="innerbox">
-		       			<a href="#"><img src="images/digitalmarketing.svg"></a>
+<!--		       			<a href="#">-->
+		       			<img src="images/digitalmarketing.svg">
+<!--		       			</a>-->
        				</div>
-       				<a href="#"> Digital Marketing </a>
+<!--       				<a href="#">-->
+       				 Digital Marketing 
+<!--       				 </a>-->
        			</div>
 
        			<div class="graph">
        				<div class="innerbox">
-		       			<a href="#"><img src="images/Audio.svg"></a>	
+<!--		       			<a href="#">-->
+		       			<img src="images/Audio.svg">
+<!--		       			</a>	-->
        				</div>
-       					<a href="#"> Music and Audio </a>
+<!--       					<a href="#">-->
+       					 Music and Audio 
+<!--       					 </a>-->
        			</div>
        		</div>
        		
        		<div uk-scrollspy="cls:uk-animation-slide-bottom; delay: 300; repeat:true;" class="cat_one">
        			<div class="graph">
        				<div class="innerbox">
-		       			<a href="#"><img src="images/programming.svg"></a>
+<!--		       			<a href="#">-->
+		       			<img src="images/programming.svg">
+<!--		       			</a>-->
        				</div>
-       				<a href="#"> Programming and Tech. </a>
+<!--       				<a href="#">-->
+       				 Programming and Tech. 
+<!--       				 </a>-->
        			</div>
 
        			<div class="graph">
        				<div class="innerbox">
-		       			<a href="#"><img src="images/writing.svg"></a>
+<!--		       			<a href="#">-->
+		       			<img src="images/writing.svg">
+<!--		       			</a>-->
        				</div>
-       				<a href="#"> Writing & Translation </a>
+<!--       				<a href="#">-->
+       				 Writing & Translation 
+<!--       				 </a>-->
        			</div>
        		</div>
        		
        		<div uk-scrollspy="cls:uk-animation-slide-top; delay: 300; repeat:true;" class="cat_one">
        			<div class="graph">
        				<div class="innerbox">
-		       			<a href="#"><img src="images/video.svg"></a>	
+<!--		       			<a href="#">-->
+		       			<img src="images/video.svg">
+<!--		       			</a>	-->
     				</div>
-       				<a href="#"> Video and Animation </a>
+<!--       				<a href="#">-->
+       				 Video and Animation 
+<!--       				 </a>-->
        			</div>
 
        			<div class="graph">
        				<div class="innerbox">
-		       			<a href="#"><img src="images/business.svg"></a>
+<!--		       			<a href="#">-->
+		       			<img src="images/business.svg">
+<!--		       			</a>-->
        				</div>
-       				<a href="#"> Business </a>
+<!--       				<a href="#">-->
+       				 Business 
+<!--       				 </a>-->
        			</div>
        		</div>
 
@@ -323,7 +407,37 @@
 
  	  	<div class="all">
  	  	<div class="all_cat">
- 	  		<a href=""><span class="triangle">&#8227;</span>PHP</a> <br>
+ 	  	<?php
+              
+                  $query="SELECT * FROM sub_category LIMIT 0,4";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=1'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+ 	  	<?php
+                  $query="SELECT * FROM sub_category LIMIT 20,4";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=6'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+<!-- 	  		<a href=""><span class="triangle">&#8227;</span>PHP</a> <br>-->
+<!--
  	  		<a href=""><span class="triangle">&#8227;</span>Graphic Designing</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>3D Rendering</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Photoshop</a> <br>
@@ -335,9 +449,39 @@
  	  		<a href=""><span class="triangle">&#8227;</span>Java</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Data Entry</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Translation</a> <br>
+-->
  	  	</div>
 
  	  	<div class="all_cat">
+ 	  	<?php
+                  $query="SELECT * FROM sub_category LIMIT 4,4";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=2'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+ 	  	<?php
+                  $query="SELECT * FROM sub_category LIMIT 28,2";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=8'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+<!--
  	  		<a href=""><span class="triangle">&#8227;</span>Research Writing</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Research</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Copy Writing</a> <br>
@@ -350,9 +494,41 @@
  	  		<a href=""><span class="triangle">&#8227;</span>Banner Design</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Software Testing</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>C++ Programming</a> <br> 		
+-->
  	  	</div>
 
  	  	<div class="all_cat">
+ 	  		<?php
+                  $query="SELECT * FROM sub_category LIMIT 8,4";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=3'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+              <?php
+                  $query="SELECT * FROM sub_category LIMIT 30,2";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=8'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+             
+ 	  	
+<!--
  	  		<a href=""><span class="triangle">&#8227;</span>Linux</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Video Services</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Content Writing</a> <br>
@@ -365,9 +541,40 @@
  	  		<a href=""><span class="triangle">&#8227;</span>C# Programming</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>3D Modelling</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>PowerPoint</a> <br>
+-->
  	  	</div>
 
  	  	<div class="all_cat">
+ 	  	<?php
+                  $query="SELECT * FROM sub_category LIMIT 12,4";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=4'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+               <?php
+                  $query="SELECT * FROM sub_category LIMIT 24,2";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=7'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+ 	  		
+<!--
  	  		<a href=""><span class="triangle">&#8227;</span>Wordpress</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Article Writing</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>3D Animation</a> <br>
@@ -380,9 +587,40 @@
  	  		<a href=""><span class="triangle">&#8227;</span>Internet Marketing</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>MySQL</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Ghost Writing</a> <br>
+-->
  	  	</div>
 
  	  	<div class="all_cat">
+ 	  	
+ 	  	<?php
+                  $query="SELECT * FROM sub_category LIMIT 16,4";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=5'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+               <?php
+                  $query="SELECT * FROM sub_category LIMIT 26,2";
+                  $select_sub_category=mysqli_query($connection,$query);
+                  
+                  while($row2=mysqli_fetch_assoc($select_sub_category)){
+                      $sub_cat_name=$row2['category_name'];
+                      
+                    echo "<a href='../workspace/workspace_category.php?c_id=7'><span class='triangle''>&#8227;</span>{$sub_cat_name}</a> <br>";  
+                  }
+                  
+                  
+              
+              
+              ?>
+<!--
  	  		<a href=""><span class="triangle">&#8227;</span>Mobile App Development</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Website Development</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Website Management</a> <br>
@@ -395,6 +633,7 @@
  	  		<a href=""><span class="triangle">&#8227;</span>Industries</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>Education</a> <br>
  	  		<a href=""><span class="triangle">&#8227;</span>See All</a> <br>
+-->
  	  	</div>
 
  	  </div>

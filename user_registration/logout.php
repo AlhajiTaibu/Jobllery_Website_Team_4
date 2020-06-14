@@ -8,5 +8,5 @@ session_start();?>
     $_SESSION['email']= null;
     $_SESSION['user_role']= null;
     
-   header("Location: login.php");   //Redirecting user to the login page
+   header("Location:../Homepage/index.php");   //Redirecting user to the main page
 ?>

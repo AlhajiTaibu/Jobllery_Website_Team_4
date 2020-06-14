@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Jobdetails</title>
+	<title>Jobllery</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" href="images/jlogo.png">
@@ -26,20 +26,73 @@
 
 			    <!-- search bar -->
 			<div class="uk-margin">
+<!--
 			    <form class="uk-search uk-search-default searchbar">
 			        <a href="" class="uk-search-icon-flip" uk-search-icon></a>
 			        <input class="uk-search-input searchbox" type="search" placeholder="Search Job...">
 			    </form>
+-->
 			</div>
 			   <!--  search bar ends -->
 
 
 			    <div class="uk-navbar-right linksandbuttons">
 			        <ul class="uk-navbar-nav">
+                   
+                     <?php
+                           
+                                if($_SESSION['username']){
+                                
+                                   
+                                }else{
+                                   echo '<li class="uk-active"><a href="../user_registration/login.php">LOG IN</a></li>';  
+                                   echo '<li class="uk-active"><a href="../user_registration/register.php">SIGN UP</a></li>'; 
+                                }
+                               
+                           
+                        ?>
+<!--
 			            <li class="uk-active"><a href="../user_registration/login.php">LOG IN</a></li>
 			            <li class="uk-active"><a href="../user_registration/register.php">SIGN UP</a></li>
+-->
 			            <div class="uk-navbar-item">
+                        <?php
+                            if(isset($_SESSION['username'])){
+                                if($_SESSION['user_role']=='client'){
+                                  echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>';   
+                                }elseif($_SESSION['user_role']=='freelancer'){
+                                  
+                                }
+                               
+                            }else{
+                                 echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>';                                  
+
+                            }
+                        ?>
+<!--
 			                <button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/login.php">Post a Job</a></button>
+			                
+-->
+			        	</div>
+			        	<div class="uk-navbar-item">
+			        	 <?php
+                            if(isset($_SESSION['username'])){
+                                if($_SESSION['user_role']=='client'){
+                                    
+                                }elseif($_SESSION['user_role']=='freelancer'){
+                                    
+                                  echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../workspace/workspace.php">Browse Jobs</a></button>';
+                                    
+                                }else{
+                                    echo '<button class="uk-button uk-button-default navbutton1"><a class="btns" href="../workspace/workspace.php">Browse Jobs</a></button>'; 
+                                }
+                               
+                            }else{
+                                 echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../workspace/workspace.php">Browse Job</a></button>';                                  
+
+                            }
+                        ?>
+<!--			        	<button class="uk-button uk-button-default navbutton"><a class="btns" href="../workspace/workspace.php">Browse Job</a></button>-->
 			        	</div>
 			        </ul>
 			    </div>
@@ -99,14 +152,28 @@
 				<h5><span id="currentdate">Posted on: <?php echo $createdAt; ?> </span> <span id="location"> <?php echo $location; ?></span> </h5>
 			</div>
 			<div class="jobShare">
-				<a href="#"><i class="fas fa-share-alt soShare"></i></a><span class="Share"> Share </span> 
-				<a href="#"><i class="fas fa-star soShare"></i></a><span class="saveAd"> Save ad</span> <br>
+<!--
+				<a href="#"><i class="fas fa-share-alt soShare"></i></a><span class="Share">  </span> 
+				<a href="#"><i class="fas fa-star soShare"></i></a><span class="saveAd"> </span> 
+-->
+				<br><br>
+				<br><br>
 				
 				<?php
                 
                 if($_SESSION['user_role']=='freelancer'){
-                    ?>
-                <button class="uk-button uk-button-default applyButton"><a class="btns" href="../freelancer/jobs_applied.php?job_post_id=<?php echo $job_post_id;?>&client_id=<?php echo $client_id;?>">Apply for this job</a></button>  
+                 
+                    if($status==='awarded'){
+                       
+                        echo "<h6 class='overviewDetails'><strong>Job Application Closed</strong></h6>";
+//                    echo "<button class='uk-button uk-button-default applyButton'><a class='btns' href='../freelancer/jobs_applied.php?job_post_id=$job_post_id&client_id=$client_id'>Apply for this job</a></button> ";
+                       
+                    }else{
+                    echo "<button class='uk-button uk-button-default applyButton'><a class='btns' href='../freelancer/jobs_applied.php?job_post_id=$job_post_id&client_id=$client_id'>Apply for this job</a></button> "; 
+                    }
+                    
+                ?>
+<!--                <button class="uk-button uk-button-default applyButton"><a class="btns" href="../freelancer/jobs_applied.php?job_post_id=<?php echo $job_post_id;?>&client_id=<?php echo $client_id;?>">Apply for this job</a></button>  -->
               <?php  }else{
                     ?>
                 <a href="../user_registration/login.php" class="overviewDetails">To apply? Click here to  Login as freelancer</a> 
@@ -201,11 +268,24 @@
 
 <?php
                 
-                if($_SESSION['user_role']=='freelancer'){
+//                if($_SESSION['user_role']=='freelancer'){
+                    
+                     if($_SESSION['user_role']=='freelancer'){
+                 
+                    if($status==='awarded'){
+                       
+                        echo "<h5 class='overviewDetails uk-text-center'><strong>Job Application Closed</strong></h5>";
+//                    echo "<button class='uk-button uk-button-default applyButton'><a class='btns' href='../freelancer/jobs_applied.php?job_post_id=$job_post_id&client_id=$client_id'>Apply for this job</a></button> ";
+                       
+                    }else{
+                    echo "<button class='uk-button uk-button-default applyButton'><a class='btns' href='../freelancer/jobs_applied.php?job_post_id=$job_post_id&client_id=$client_id'>Apply for this job</a></button> "; 
+                    }
                ?>
+<!--
 	<button class="uk-button uk-button-default applyButton bottomApply"><a class="btns" href="../freelancer/jobs_applied.php?job_post_id=<?php echo $job_post_id;?>&client_id=<?php echo $client_id;?>">Apply for this job</a></button>
 
 	<a class="reportAd" href="#"><i class="fas fa-exclamation-triangle soShare"></i> Report this ad </a>
+-->
 <?php }else{    ?>
                  <a href="../user_registration/login.php" class="overviewDetails">To apply? Click here to  Login as freelancer</a>   
             <?php    }

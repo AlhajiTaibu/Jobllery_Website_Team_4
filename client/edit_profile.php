@@ -15,7 +15,7 @@
                                 class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
                     </li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+<!--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
             </div>
         </nav>
 <?php include "includes/navigation.php";?>
@@ -31,8 +31,10 @@
                         $query="SELECT * FROM client WHERE user_id={$user_id}";
                         $select_profile=mysqli_query($connection,$query);
                         confirmQuery($select_profile);
+                        $count=mysqli_num_rows($select_profile);
                             
-                        while($row=mysqli_fetch_assoc($select_profile)){
+                        if($count>0){
+                           while($row=mysqli_fetch_assoc($select_profile)){
                             $firstname=$row['firstname'];
                             $lastname=$row['lastname'];
                             $address=$row['address'];
@@ -44,7 +46,22 @@
                             $description=$row['description'];
                             $url=$row['url'];
                             $tags=$row['tags'];
+                        }  
+                        }else{
+                          $firstname=" ";
+                            $lastname=" ";
+                            $address=" ";
+                            $dob=" ";
+                            $contact_number=" ";
+                            $job_title=" ";
+                            $gender=" ";
+                            $image=" ";
+                            $description=" ";
+                            $url=" ";
+                            $tags=" ";  
                         }
+                            
+                       
 
 
                             

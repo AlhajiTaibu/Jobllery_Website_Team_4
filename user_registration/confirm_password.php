@@ -4,7 +4,7 @@
 <!--  <?php include "includes/navigation.php";?>-->
 <div class="header">
 
-			 <a href=""><img class="logo" src="../loginsignup/images/jlogo.png"></a>
+			 <a href="../Homepage/index.php"><img class="logo" src="../loginsignup/images/jlogo.png"></a>
 
 				
 			 <img class="midtext" src="../loginsignup/images/textAnim.gif">

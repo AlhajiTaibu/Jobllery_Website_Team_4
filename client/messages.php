@@ -7,15 +7,21 @@
                 <div class="joblllery-logo"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.php"></a></div>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
-                            href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a><a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a>
+                    <a class="nav-link" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>
+<!--                    <a class="nav-link" href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a>-->
+                            <a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
+<!--
                         <a
-                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a><a class="nav-link active" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>
+                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a>
+-->
+                            <a class="nav-link active" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a>
+                            
                             <a
                                 class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
                     </li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+<!--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
             </div>
         </nav>
 <?php include "includes/navigation.php";?>
@@ -41,7 +47,7 @@
                                                         <tr>
                                                         <?php
                                                          //prepare query to retreive freelancer from users table and order alphabetically
-                                                        $query="SELECT * FROM users WHERE user_role='freelancer' ORDER BY username ASC";
+                                                        $query="SELECT * FROM profile ORDER BY first_name ASC";
                                                         
                                                         //assign variable with mysqli query result
                                                         $select_users=mysqli_query($connection,$query);
@@ -51,14 +57,18 @@
                                                         //Looping through result
                                                         while($row=mysqli_fetch_assoc($select_users)){
                                                         
-                                                        $id =$row['id'];                     //assignment of variable
-                                                        $username=$row['username'];
+                                                        $id =$row['user_id'];                     //assignment of variable
+                                                        $first_name=$row['first_name'];
+                                                        $last_name=$row['last_name'];
+                                                        $address=$row['address'];
                                                        
                                                             ?>
                                                                <td class="contact-list">
                                                                 <div class="col contact_navigation">
                                                                     <ul class="nav">
-                                                                        <li class="nav-item"><a class="nav-link active" href="messages.php?p_id=<?php echo $id;?>"><img class="border rounded-circle" src="assets/img/avatars/avatar5.jpeg"><div><h6 class="chat-text"><?php echo $username; ?></h6><h6 class="chat-text">Amalitech gGmbH</h6></div></a></li>
+                                                                        <li class="nav-item"><a class="nav-link active text-center" href="messages.php?p_id=<?php echo $id;?>">
+<!--                                                                        <img class="border rounded-circle" src="assets/img/avatars/avatar5.jpeg">-->
+                                                                        <div><h6 class="chat-text"><?php echo $first_name." " .$last_name; ?></h6><h6 class="chat-text text-justify"><?php echo $address; ?></h6></div></a></li>
 
                                                                     </ul>
                                                                 </div>
@@ -81,7 +91,7 @@
                                         $active_chat_user_id=$_GET['p_id'];             //assign the got id to a variable
                                         
                                         //prepare a query to select the user that bears the set id
-                                        $query="SELECT * FROM users WHERE id= $active_chat_user_id";
+                                        $query="SELECT * FROM profile WHERE user_id= $active_chat_user_id";
                                         
                                         //assign variable with mysqli query result
                                         $select_active_user=mysqli_query($connection,$query);
@@ -91,12 +101,15 @@
                                           //Looping through result
                                         while($row=mysqli_fetch_assoc($select_active_user)){
                                             
-                                            $active_id = $row['id'];                    //assignment of variable
-                                            $active_username= $row['username'];
+                                            $active_id = $row['user_id'];                    //assignment of variable
+                                            $active_first_name= $row['first_name'];
+                                            $active_last_name=$row['last_name'];
+                                            $active_image=$row['image'];
                                         }//end of while loop
                                     }else{// if the user id isn't set, assign the variables below to empty string
                                         $active_id="";
-                                        $active_username="";
+                                        $active_first_name="";
+                                        $active_last_name="";
                                     }
                                     
                                     ?>
@@ -108,14 +121,17 @@
                                             <table class="table">
                                                 <tbody>
                                                     <tr>
-                                                        <td><img class="rounded-circle chat-img" src="assets/img/avatars/avatar5.jpeg"></td>
+                                                        <td><div >
+<!--                                                        <img class="border rounded-circle freelancer-logo " id="chat-logo" src="../freelancer/assets/img/dogs/<?php echo $active_image; ?>">-->
+                                                        </div>
+                                                        </td>
                                                         <td>&nbsp; &nbsp; &nbsp;</td>
                                                         <td class="chat-header">
-                                                            <h6><?php echo $active_username; ?></h6>
+                                                            <h6><?php echo $active_first_name." ".$active_last_name; ?></h6>
                                                         </td>
                                                         <td class="chat-header">
                                                             <a href="messages.php?delete=<?php echo $active_id; ?>">
-                                                                <h6 class="text-right delete-chat">Delete Chat&nbsp;</h6>
+<!--                                                                <h6 class="text-right delete-chat">Delete Chat&nbsp;</h6>-->
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -180,7 +196,9 @@
                                                         <td>
                                                             <div class="col">
                                                                 <div class="form-row">
-                                                                    <div class="col col-lg-2" id="chat-body-logo"><img class="rounded-circle" id="chat-body-image" src="assets/img/avatars/avatar5.jpeg"></div>
+                                                                    <div class="col col-lg-2" id="chat-body-logo">
+<!--                                                                    <img class="rounded-circle" id="chat-body-image" src="assets/img/avatars/avatar5.jpeg">-->
+                                                                    </div>
                                                                     <div class="col col-lg-10" id="chat-body-details">
                                                                         <h6><?php echo $time; ?></h6>
                                                                     </div>
@@ -196,6 +214,8 @@
                                                     }//end of while loop
                                                     
                                                     ?>
+                                                    
+                                        
                                                <?php
                                                 
                                                 $user_id=$_SESSION['user_id'];              //assignment of variable

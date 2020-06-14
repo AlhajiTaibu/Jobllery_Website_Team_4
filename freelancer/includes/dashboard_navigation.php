@@ -2,7 +2,7 @@
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand fixed-top bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <a href="index.php"><div><img class="nav-img" src="assets/img/dogs/PNG%20jobllery%20logo.png"></div></a><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <a href="../Homepage/index.php"><div><img class="nav-img" src="assets/img/dogs/PNG%20jobllery%20logo.png"></div></a><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown no-arrow mx-1" role="presentation"></li>
                             <li class="nav-item dropdown no-arrow" role="presentation">

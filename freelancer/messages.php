@@ -10,13 +10,13 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
                             href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a><a class="nav-link" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Awarded Jobs</strong></span></a>
                         <a
-                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a><a class="nav-link active" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong></span></a>
+                            class="nav-link" href="browse_jobs.php"><i class="fas fa-info"></i><span><strong>Browse Jobs</strong></span></a><a class="nav-link active" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong></span></a>
                             <a
                                 class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
                     </li>
                     
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+<!--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
             </div>
         </nav>
 <?php include "includes/dashboard_navigation.php";?>
@@ -29,11 +29,13 @@
                         <div class="profile-container">
                             <div class="row chat-system">
                                 <div class="col-xl-3 offset-xl-0 col-lg-4 col-xl-3" id="message-sidebar">
+<!--
                                     <form>
                                         <div class="col-sm-12 col-md-12" id="message-search">
                                             <div id="search-box" class="input-group"><input class="form-control form-control" type="text" id="search-input" placeholder="Search contacts..."><span class="input-group-append"><button class="btn btn-outline-secondary" id="search-btn-btn" type="button"><i class="fa fa-search" id="search-icon"></i></button></span></div>
                                         </div>
                                     </form>
+-->
                                     
                                     <div class="row chat-btn">
                                         <div class="col">
@@ -43,7 +45,7 @@
                                                         <tr>
                                                         <?php
                                                         //prepare query to select client from users table and order alphabetically
-                                                        $query="SELECT * FROM users WHERE user_role='client' ORDER BY username ASC";
+                                                        $query="SELECT * FROM client ORDER BY firstname ASC";
                                                         
                                                         //assign variable with mysqli query result
                                                         $select_users=mysqli_query($connection,$query);
@@ -53,13 +55,17 @@
                                                         //Looping through result
                                                         while($row=mysqli_fetch_assoc($select_users)){  
                                                         
-                                                        $id =$row['id'];    //assignment of variable
-                                                        $username=$row['username'];
+                                                        $id =$row['user_id'];    //assignment of variable
+                                                        $firstname=$row['firstname'];
+                                                        $lastname=$row['lastname'];
+                                                        $address=$row['address'];
                                                         ?>
                                                             <td class="contact-list">
                                                                 <div class="col contact_navigation">
                                                                     <ul class="nav">
-                                                                        <li class="nav-item active"><a class="nav-link active" href="messages.php?p_id=<?php echo $id;?>"><img class="border rounded-circle" src="assets/img/avatars/avatar5.jpeg"><div><h6 class="chat-text"><?php echo $username; ?></h6><h6 class="chat-text">Amalitech gGmbH</h6></div></a>
+                                                                        <li class="nav-item active"><a class="nav-link active" href="messages.php?p_id=<?php echo $id;?>">
+<!--                                                                        <img class="border rounded-circle" src="assets/img/avatars/avatar5.jpeg">-->
+                                                                        <div><h6 class="chat-text"><?php echo $firstname." ".$lastname; ?></h6><h6 class="chat-text"><?php echo $address;?></h6></div></a>
                                                                         
                                                                         </li>
                                                                         
@@ -90,7 +96,7 @@
                                         $active_chat_user_id=$_GET['p_id'];     //assign the got id to a variable
                                         
                                         //prepare a query to select the user that bears the set id
-                                        $query="SELECT * FROM users WHERE id= $active_chat_user_id";
+                                        $query="SELECT * FROM client WHERE user_id= $active_chat_user_id";
                                         
                                         //assign variable with mysqli query result
                                         $select_active_user=mysqli_query($connection,$query);
@@ -101,12 +107,16 @@
                                         //Looping through result
                                         while($row=mysqli_fetch_assoc($select_active_user)){
                                             
-                                            $active_id = $row['id'];            //assignment of variable
-                                            $active_username= $row['username'];
+                                            $active_id = $row['user_id'];            //assignment of variable
+                                            $active_firstname= $row['firstname'];
+                                            $active_lastname= $row['lastname'];
+                                            $active_address= $row['address'];
                                         }//end of while loop
                                     }else{// if the user id isn't set, assign the variables below to empty string
                                         $active_id="";
-                                        $active_username="";
+                                       $active_firstname= "";
+                                        $active_lastname= "";
+                                        $active_address= "";
                                     }
                                     
                                     ?>
@@ -117,14 +127,15 @@
                                             <table class="table">
                                                 <tbody>
                                                     <tr>
-                                                        <td><img class="rounded-circle chat-img" src="assets/img/avatars/avatar5.jpeg"></td>
+                                                        <td>
+<!--                                                        <img class="rounded-circle chat-img" src="assets/img/avatars/avatar5.jpeg"></td>-->
                                                         <td>&nbsp; &nbsp; &nbsp;</td>
                                                         <td class="chat-header">
-                                                            <h6><?php echo $active_username; ?></h6>
+                                                            <h6><?php echo  $active_firstname." ".$active_lastname; ?></h6>
                                                         </td>
                                                         <td class="chat-header">
                                                             <a href="messages.php?delete=<?php echo $active_id; ?>">
-                                                                <h6 class="text-right delete-chat">Delete Chat&nbsp;</h6>
+<!--                                                                <h6 class="text-right delete-chat">Delete Chat&nbsp;</h6>-->
                                                             </a>
                                                         </td>
                                                     </tr>

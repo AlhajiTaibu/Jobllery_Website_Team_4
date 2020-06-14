@@ -7,39 +7,55 @@
                 <div class="joblllery-logo"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.php"></a></div>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
-                            href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a><a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a>
+                         
+                          <a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a>
+                           <a class="nav-link active" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>
+<!--
+                           <a class="nav-link"
+                            href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a>
+-->
+                            <a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
+<!--
                         <a
-                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link active" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>
+                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a>
+-->
+                            <a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a>
+                            
                             <a
                                 class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
                     </li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+<!--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
             </div>
         </nav>
 <?php include "includes/navigation.php";?>
             <div class="container-fluid profile">
                 <div class="profile-container">
                     <h4 class="header"><strong>Manage Jobs</strong></h4>
-                    <form action="search_my_jobs.php" method="post">
-                        <div class="form-row" id="row-style">
-                            <div class="col-12 offset-0 col-md-6 col-sm-9 col-xs-12 col-lg-4" id="forms">
+                   <div class="row">
+                       <div class="col-3 col-md-4 col-sm-9 col-xs-12">
+                           <form action="search_my_jobs.php" method="post">
+                            <div class="form-row" id="row-style">
+<!--                            <div class="col-6 offset-0 col-md-6 col-sm-9 col-xs-12 col-lg-4" id="forms">-->
                                 <div class="input-group">
                                 <input class="form-control input-btn" type="text" placeholder="Search" name="search_name"><span class="input-group-append">
                                 <button class="btn btn-outline-success btn-sm" id="search-btn" name="search">
                                 <i class="fa fa-search search-icon"></i>
                                 </button></span>
                                 </div>
-                            </div>
-                             </form>
-                            <div class="col-7 col-md-2 offset-1 offset-md-0 col-md-2 col-sm-4 col-xs-12 col-lg-4 sort-col" id="forms">
+<!--                            </div>-->
 
-                            </div>
-                            <div class="col-md-4 col-md-4 col-sm-8" id="forms">
-
-                            </div>
                         </div>
+                   </form> 
+                       </div>
+                       <div class="col-3 col-md-3"> </div>
+                       <div class="col-3 col-md-2"> </div>
+                       <div class="col-3 col-md-3 col-sm-3 col-xs-12">
+                         <a href="submit_job.php"><button class="btn btn-block btn-success" id="button">Post Job</button></a>   
+                       </div>
+                   </div>
+                   
                    
                     <div class="container-fluid">
                         <div class="table-responsive table-borderless" id="table-background">

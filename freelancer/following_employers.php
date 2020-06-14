@@ -10,110 +10,78 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
                             href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a><a class="nav-link" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Awarded Jobs</strong></span></a>
                         <a
-                            class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link active" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong></span></a>
+                            class="nav-link" href="browse_jobs.php"><i class="fas fa-info"></i><span><strong>Browse Jobs</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link active" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Clients</strong></span></a>
                             <a
                                 class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
                     </li>
                     
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+<!--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
             </div>
         </nav>
 <?php include "includes/dashboard_navigation.php";?>
             <div class="container-fluid profile">
                 <div class="profile-container">
-                    <h4 class="header"><strong>Following Employers</strong></h4>
+                    <h4 class="header"><strong>Clients</strong></h4>
+<!--
                     <form>
                         <div class="form-row" id="row-style">
                             <div class="col-12 col-md-8 col-lg-5 offset-0 col-md-6 col-sm-9 col-xs-12 col-lg-4" id="forms">
                                 <div class="input-group"><input class="form-control input-btn" type="text" placeholder="Search"><span class="input-group-append"><button class="btn btn-outline-success btn-sm" id="search-btn" type="button"><i class="fa fa-search d-inline-block search-icon"></i></button></span></div>
                             </div>
                             <div class="col-1 col-md-3 col-lg-1 offset-3 offset-md-3 offset-lg-0 col-md-2 col-sm-4 col-xs-12 col-lg-4 sort-col" id="forms">
-<!--                                <div class="sort"><label class="text-nowrap" for="search">Sort by</label></div>-->
+                                <div class="sort"><label class="text-nowrap" for="search">Sort by</label></div>
                             </div>
                             <div class="col-12 col-md-6 col-lg-3 offset-0 col-md-4 col-sm-8" id="forms">
-<!--                                <div><select class="form-control input-btn"><option value="undefined">Newest</option><option value="">Date</option><option value="">Ascending</option><option value="">Descending</option></select></div>-->
+                                <div><select class="form-control input-btn"><option value="undefined">Newest</option><option value="">Date</option><option value="">Ascending</option><option value="">Descending</option></select></div>
                             </div>
                         </div>
                     </form>
+-->
                     <div class="table-responsive follow-tbody">
                         <table class="table">
                             <tbody>
+                               <?php
+                                $query="SELECT * FROM client ";
+                                $select_client=mysqli_query($connection,$query);
+                                confirmQuery($select_client);
+                                while($row=mysqli_fetch_assoc($select_client)){
+                                    $first_name =$row['firstname'];
+                                    $last_name =$row['lastname'];
+                                    $address =$row['address'];
+                                    $image = $row['image'];
+                                    
+                               
+                                
+                            
+                                ?>
+                                
                                 <tr class="logo-background">
-                                    <td id="img-div">
-                                        <div></div>
+                                    <td>
+                                        <img src="../client/assets/img/dogs/<?php echo  $image; ?>" alt="" class="freelancer-logo">
                                     </td>
                                     <td>
                                         <div class="text-justify job-logo-text">
-                                            <h4><strong>AmaliTech gGmbH</strong></h4>
-                                            <h6>SSNIT Houuse, Takoradi</h6>
+                                            <h4><strong>Name: <?php echo  $first_name. " ".$last_name; ?></strong></h4>
+                                            <h6>Location: <?php echo  $address; ?></h6>
                                         </div>
                                     </td>
                                     <td class="text-right">
                                         <div id="follow-employers-btn">
                                             <div class="row">
                                                 <div class="col">
-                                                    <div><button class="btn btn-success btn-sm" id="follow-btn" type="button">Unfollow</button></div>
+<!--                                                    <div><button class="btn btn-success btn-sm" id="follow-btn" type="button">Unfollow</button></div>-->
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <h6 id="job-open" class="job-open">1 Open Job</h6>
+<!--                                                    <h6 id="job-open" class="job-open">1 Open Job</h6>-->
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="logo-background">
-                                    <td id="img-div">
-                                        <div></div>
-                                    </td>
-                                    <td>
-                                        <div class="text-justify job-logo-text">
-                                            <h4><strong>AmaliTech gGmbH</strong></h4>
-                                            <h6>SSNIT Houuse, Takoradi</h6>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">
-                                        <div id="follow-employers-btn">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div><button class="btn btn-success btn-sm" id="follow-btn" type="button">Unfollow</button></div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <h6 id="job-open" class="job-open">1 Open Job</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="logo-background">
-                                    <td id="img-div">
-                                        <div></div>
-                                    </td>
-                                    <td>
-                                        <div class="text-justify job-logo-text">
-                                            <h4><strong>AmaliTech gGmbH</strong></h4>
-                                            <h6>SSNIT Houuse, Takoradi</h6>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">
-                                        <div id="follow-employers-btn">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div><button class="btn btn-success btn-sm" id="follow-btn" type="button">Unfollow</button></div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <h6 id="job-open" class="job-open">1 Open Job</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php }?>
                             </tbody>
                         </table>
                     </div>
