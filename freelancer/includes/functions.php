@@ -203,8 +203,22 @@ function login_user($email,$password){
     $_SESSION['user_role'] = $db_user_role;
     $_SESSION['user_id'] =  $db_user_id;
     
-    header("Location:../client/index.php");              // Redirecting the user to the client dashboard if condition is true
+    $query="SELECT * FROM client WHERE user_id={$db_user_id}";
+    $check_profile=mysqli_query($connection,$query);
+    confirmQuery($check_profile);
+    $count=mysqli_num_rows($check_profile);
+    
+    if($count>0){
+        
+         header("Location:../client/index.php");              // Redirecting the user to the client dashboard if condition is true
       
+    }else{
+        
+         header("Location:../client/profile.php");              // Redirecting the user to the client dashboard if condition is true
+      
+    }
+    
+   
     }
         
      // Checking for correct email, password and freelancer user   
@@ -215,7 +229,19 @@ function login_user($email,$password){
     $_SESSION['user_role'] = $db_user_role;
     $_SESSION['user_id'] =  $db_user_id;
     
-    header("Location:../freelancer/index.php");      // Redirecting the user to the freelancer dashboard if condition is true
+    $query="SELECT * FROM profile WHERE user_id={$db_user_id}";
+    $check_profile=mysqli_query($connection,$query);
+    confirmQuery($check_profile);
+    $count=mysqli_num_rows($check_profile);
+        
+    if($count>0){
+      
+    header("Location:../freelancer/index.php");      // Redirecting the user to the freelancer dashboard if condition is true  
+    }else{
+        
+    header("Location:../freelancer/profile.php");      // Redirecting the user to the freelancer dashboard if condition is true
+    }
+    
   
     }
     }
@@ -670,7 +696,7 @@ function jobApplied($job_post_id,$client_id,$freelancer_id){
         $apply_job=mysqli_query($connection,$query);
         confirmQuery($apply_job); 
             
-            echo "<h6 class='alert alert-success'>Job application accepted</h6>";
+            echo "<h6 class='alert alert-success'>Job application sent</h6>";
           
         }else{
             

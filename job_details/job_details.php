@@ -41,7 +41,7 @@
                    
                      <?php
                            
-                                if($_SESSION['username']){
+                                if(isset($_SESSION['username'])){
                                 
                                    
                                 }else{
@@ -59,7 +59,7 @@
                         <?php
                             if(isset($_SESSION['username'])){
                                 if($_SESSION['user_role']=='client'){
-                                  echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../user_registration/register.php">Post a Job</a></button>';   
+                                  echo '<button class="uk-button uk-button-default navbutton"><a class="btns" href="../client/my_jobs.php">Post a Job</a></button>';   
                                 }elseif($_SESSION['user_role']=='freelancer'){
                                   
                                 }
@@ -161,16 +161,20 @@
 				
 				<?php
                 
-                if($_SESSION['user_role']=='freelancer'){
-                 
-                    if($status==='awarded'){
+                if(isset($_SESSION['user_role'])){
+                 if($_SESSION['user_role']=='freelancer'){
+                   if(($status==='awarded')&&($_SESSION['user_role']=='freelancer')){
                        
                         echo "<h6 class='overviewDetails'><strong>Job Application Closed</strong></h6>";
 //                    echo "<button class='uk-button uk-button-default applyButton'><a class='btns' href='../freelancer/jobs_applied.php?job_post_id=$job_post_id&client_id=$client_id'>Apply for this job</a></button> ";
                        
                     }else{
                     echo "<button class='uk-button uk-button-default applyButton'><a class='btns' href='../freelancer/jobs_applied.php?job_post_id=$job_post_id&client_id=$client_id'>Apply for this job</a></button> "; 
-                    }
+                    }  
+                 }else{
+                     echo "<a href='../user_registration/login.php' class='overviewDetails uk-text-center'>To apply? Click here to  Login as freelancer</a><br>";
+                 }
+                    
                     
                 ?>
 <!--                <button class="uk-button uk-button-default applyButton"><a class="btns" href="../freelancer/jobs_applied.php?job_post_id=<?php echo $job_post_id;?>&client_id=<?php echo $client_id;?>">Apply for this job</a></button>  -->
@@ -184,12 +188,20 @@
 <!--				<button class="uk-button uk-button-default applyButton"><a class="btns" href="">Apply for this job</a></button>-->
 				
 				<?php
-                if($_SESSION['user_id']==$client_id){
-                    ?>
-                    <button class="uk-button uk-button-default applyButton applyButton1"><a class="btns" href="../client/edit_job.php?p_id=<?php echo $job_post_id;?>">Edit job</a></button>
-             <?php   }else{
+                if(isset($_SESSION['user_id'])){
+                    
+                    if($_SESSION['user_id']==$client_id){
+                    
+                    
+                   echo "<button class='uk-button uk-button-default applyButton applyButton1'><a class='btns' href='../client/edit_job.php?p_id=$job_post_id&client_id=$client_id'>Edit job</a></button>";
+             
+                   }else{
                     
                 }
+                }else{
+                    
+                }
+                
                 
                 ?>
 <!--				<button class="uk-button uk-button-default applyButton applyButton1"><a class="btns" href="">Edit job</a></button>-->
@@ -270,16 +282,21 @@
                 
 //                if($_SESSION['user_role']=='freelancer'){
                     
-                     if($_SESSION['user_role']=='freelancer'){
-                 
-                    if($status==='awarded'){
+                     if(isset($_SESSION['user_role'])){
+                 if($_SESSION['user_role']=='freelancer'){
+                     
+                    if(($status==='awarded')&&($_SESSION['user_role']=='freelancer')){
                        
                         echo "<h5 class='overviewDetails uk-text-center'><strong>Job Application Closed</strong></h5>";
 //                    echo "<button class='uk-button uk-button-default applyButton'><a class='btns' href='../freelancer/jobs_applied.php?job_post_id=$job_post_id&client_id=$client_id'>Apply for this job</a></button> ";
                        
                     }else{
                     echo "<button class='uk-button uk-button-default applyButton'><a class='btns' href='../freelancer/jobs_applied.php?job_post_id=$job_post_id&client_id=$client_id'>Apply for this job</a></button> "; 
-                    }
+                    } 
+                 }else{
+                   echo "<a href='../user_registration/login.php' class='overviewDetails uk-text-center'>To apply? Click here to  Login as freelancer</a>";
+                 }
+                    
                ?>
 <!--
 	<button class="uk-button uk-button-default applyButton bottomApply"><a class="btns" href="../freelancer/jobs_applied.php?job_post_id=<?php echo $job_post_id;?>&client_id=<?php echo $client_id;?>">Apply for this job</a></button>

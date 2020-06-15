@@ -10,7 +10,9 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="index.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a><a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user-alt"></i><span><strong>Profile</strong></span></a>
-                     <a class="nav-link" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>      
+                     <a class="nav-link" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a> 
+                     <a class="nav-link" href="ongoing_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>Ongoing Jobs</strong><br></span></a>
+                     <a class="nav-link" href="completed_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>Completed Jobs</strong><br></span></a>     
 <!--                    <a class="nav-link" href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a>-->
                     <a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
 <!--
@@ -79,34 +81,50 @@
                             </a>
                         </div>
                     </div>
-<!--
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-bottom-success py-2">
+                           <a href="ongoing_jobs.php">
                             <div class="card-body" id="index-card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col mr-2">
                                         <div class="text-dark font-weight-bold h5 mb-0"></div>
                                     </div>
                                 </div>
-                                <h3><strong>0</strong></h3>
-                                <h6>Review<br></h6>
+                                <?php
+                                $query="SELECT * FROM jobs_applied WHERE client_id={$_SESSION['user_id']} AND job_progress='ongoing'"; 
+                                $select_ongoing_jobs = mysqli_query($connection,$query);
+                                confirmQuery($select_ongoing_jobs);
+                                $number_of_ongoing_jobs= mysqli_num_rows($select_ongoing_jobs);
+                           
+                                ?>
+                                <h3><strong><?php echo $number_of_ongoing_jobs; ?></strong></h3>
+                                <h6>Ongoing Jobs<br></h6>
                             </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-bottom-success py-2">
+                           <a href="completed_jobs.php">
                             <div class="card-body" id="index-card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col mr-2">
                                         <div class="text-dark font-weight-bold h5 mb-0"></div>
                                     </div>
                                 </div>
-                                <h3><strong>25</strong></h3>
-                                <h6>Views<br></h6>
+                                <?php
+                                $query="SELECT * FROM jobs_applied WHERE client_id={$_SESSION['user_id']} AND job_progress='completed'"; 
+                                $select_completed_jobs = mysqli_query($connection,$query);
+                                confirmQuery($select_completed_jobs);
+                                $number_of_completed_jobs= mysqli_num_rows($select_completed_jobs);
+                           
+                                ?>
+                                <h3><strong><?php echo $number_of_completed_jobs; ?></strong></h3>
+                                <h6>Completed Jobs<br></h6>
                             </div>
+                            </a>
                         </div>
                     </div>
--->
                     <div class="col">
                         <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
                     </div>

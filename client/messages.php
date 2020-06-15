@@ -9,6 +9,8 @@
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a>
                     <a class="nav-link" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>
+                    <a class="nav-link" href="ongoing_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>Ongoing Jobs</strong><br></span></a>
+                    <a class="nav-link" href="completed_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>Completed Jobs</strong><br></span></a>
 <!--                    <a class="nav-link" href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a>-->
                             <a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
 <!--
@@ -34,11 +36,13 @@
                         <div class="profile-container">
                             <div class="row chat-system">
                                 <div class="col-xl-3 offset-xl-0 col-lg-4 col-xl-3" id="message-sidebar">
+<!--
                                     <form>
                                         <div class="col-sm-12 col-md-12" id="message-search">
                                             <div id="search-box" class="input-group"><input class="form-control form-control" type="text" id="search-input" placeholder="Search contacts..."><span class="input-group-append"><button class="btn btn-outline-secondary" id="search-btn-btn" type="button"><i class="fa fa-search" id="search-icon"></i></button></span></div>
                                         </div>
                                     </form>
+-->
                                     <div class="row chat-btn">
                                         <div class="col">
                                             <div class="table-responsive" id="contact-list">

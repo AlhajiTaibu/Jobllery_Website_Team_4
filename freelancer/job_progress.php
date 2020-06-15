@@ -7,9 +7,10 @@
                 <div class="joblllery-logo"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.php"></a></div>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link active"
-                            href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a><a class="nav-link" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Awarded Jobs</strong></span></a>
-                             <a class="nav-link" href="job_progress.php"><i class="fas fa-clipboard-list"></i><span><strong>Job Progress</strong></span></a>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
+                            href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a>
+                            <a class="nav-link" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Awarded Jobs</strong></span></a>
+                            <a class="nav-link active" href="job_progress.php"><i class="fas fa-clipboard-list"></i><span><strong>Job Progress</strong></span></a>
                         <a
                             class="nav-link" href="browse_jobs.php"><i class="fas fa-info"></i><span><strong>Browse Jobs</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Clients</strong></span></a>
 <!--
@@ -79,6 +80,7 @@
                                 while($row=mysqli_fetch_assoc($select_applied_jobs)){
                                     $job_post_id = $row['job_post_id'];
                                     $apply_date = $row['apply_date'];
+                                    $job_progress= $row['job_progress'];
                                     
                                     
                                 $query="SELECT * FROM job_post WHERE job_post_id = {$job_post_id}";
@@ -109,7 +111,23 @@
                                     </td>
                                     <td>
                                         <div class="close-logo">
-<!--                                        <a href="#"><i class="icon ion-android-delete trash"></i></a>-->
+                                        <?php echo $job_progress; ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="close-logo">
+                                        <?php
+                                            if($job_progress==='completed'){
+                                             
+                                                echo "<a href='job_progress.php?request_id=$job_post_id'>Request for Payment</a>";
+                                            }else{
+                                                
+                                            }
+                                            
+                                            
+                                            ?>
+                                        
+                                        
                                         </div>
                                     </td>
                                 </tr>
@@ -117,6 +135,20 @@
                                    }
                                 
                                 ?>
+                                
+                                
+                                
+                                <?php
+                                if(isset($_GET['request_id'])){
+                                    
+                                    echo "Payment is requested";
+                                    //header("location:job_progress.php");
+                                }
+                                
+                                
+                                
+                                ?>
+                                
 <!--
                                     <tr class="logo-background">
                                         <td id="img-div">

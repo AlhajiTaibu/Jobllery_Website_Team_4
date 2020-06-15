@@ -52,7 +52,7 @@
                         ?>
                          <?php
                            
-                                if($_SESSION['username']){
+                                if(isset($_SESSION['username'])){
                                 
                                    
                                 }else{
@@ -109,7 +109,7 @@
         $count_post=ceil($count_post/5);
     
     
-    $query="SELECT * FROM job_post ORDER BY createdAt DESC LIMIT $page_no,5";
+    $query="SELECT * FROM job_post WHERE status='open' ORDER BY createdAt DESC LIMIT $page_no,5";
     $select_all_jobs=mysqli_query($connection,$query);
     confirmQuery( $select_all_jobs);
     

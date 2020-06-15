@@ -1,5 +1,7 @@
 <?php  ob_start(); ?>
 <?php session_start();?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +55,7 @@
                         
                         <?php
                            
-                                if($_SESSION['username']){
+                                if(isset($_SESSION['username'])){
                                 
                                    
                                 }else{

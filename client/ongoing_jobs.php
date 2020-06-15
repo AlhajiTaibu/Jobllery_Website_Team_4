@@ -9,10 +9,10 @@
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/client_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a>
                             <a class="nav-link" href="my_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>My Jobs</strong><br></span></a>
-                            <a class="nav-link" href="ongoing_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>Ongoing Jobs</strong><br></span></a>
+                            <a class="nav-link active" href="ongoing_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>Ongoing Jobs</strong><br></span></a>
                             <a class="nav-link" href="completed_jobs.php"><i class="fas fa-paper-plane"></i><span><strong>Completed Jobs</strong><br></span></a>
 <!--<a class="nav-link" href="submit_job.php"><i class="fas fa-toolbox"></i><span><strong>Submit Job</strong><br></span></a>-->
-                            <a class="nav-link active" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
+                            <a class="nav-link" href="shortlisted_candidates.php"><i class="fas fa-clipboard-list"></i><span><strong>Shortlisted Candidates</strong></span></a>
 <!--
                         <a
                             class="nav-link" href="notification.php"><i class="fas fa-info"></i><span><strong>Notification</strong></span></a>
@@ -29,7 +29,7 @@
 <?php include "includes/navigation.php";?>
             <div class="container-fluid profile">
                 <div class="profile-container">
-                    <h3 class="header"><strong>Shortlisted Candidates</strong></h3>
+                    <h3 class="header"><strong>Ongoing Jobs</strong></h3>
                     <form>
                         <div class="form-row" id="row-style">
 <!--
@@ -52,7 +52,7 @@
                             <tbody>
                            <?php
                     
-                            $query="SELECT * FROM jobs_applied WHERE client_id= {$_SESSION['user_id']} ORDER BY apply_date DESC";
+                            $query="SELECT * FROM jobs_applied WHERE client_id= {$_SESSION['user_id']} AND job_progress='ongoing' ORDER BY apply_date DESC";
                             $select_jobs=mysqli_query($connection,$query);
                             confirmQuery($select_jobs);
                             while($row=mysqli_fetch_assoc($select_jobs)){
@@ -102,7 +102,7 @@
                                 ?>
                                
                                 <tr class="logo-background">
-                                    <td><a href="shortlisted_candidates.php?job_post_id=<?php echo $job_post_id; ?>"><img  class="freelancer-logo" src="../freelancer/assets/img/dogs/<?php echo $image;?>"></a></td>
+                                    <td><img  class="freelancer-logo" src="../freelancer/assets/img/dogs/<?php echo $image;?>"></td>
                                     <td>
                                         <div id="shortlisted-candidates" class="text-justify job-logo-text">
                                             <h4><strong>Job Title: <?php echo $job_title; ?></strong></h4>
@@ -112,11 +112,11 @@
                                     </td>
                                     <td>
                                         <div class="close-logo">
-                                        <a href="shortlisted_candidates.php?job_post_id=<?php echo $job_post_id; ?>&f_id=<?php echo $freelancer_id; ?>"><i class="fas fa-check"></i></a>
+                                        <a href="ongoing_jobs.php?job_post_id=<?php echo $job_post_id; ?>&f_id=<?php echo $freelancer_id; ?>"><i class="fas fa-check"></i></a>
                                         <a href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $freelancer_id; ?>"><i class="icon ion-eye view"></i></a>
                                         <a href="messages.php?p_id=<?php echo $freelancer_id; ?>"><i class="material-icons chats">chat</i></a>
                                         
-                                        <a href="shortlisted_candidates.php?job_id=<?php echo $job_post_id; ?>&f_id=<?php echo $freelancer_id; ?>"><i class="icon ion-android-delete trash" ></i></a>
+<!--                                        <a href="shortlisted_candidates.php?job_id=<?php echo $job_post_id; ?>&f_id=<?php echo $freelancer_id; ?>"><i class="icon ion-android-delete trash" ></i></a>-->
                                         </div>
                                     </td>
                                 </tr>
@@ -147,22 +147,19 @@
                     $status = $row['status'];
                     
                 }
-                if($status==='open'){
+                if($status==='awarded'){
                     
-                $query="UPDATE job_post SET status='awarded' WHERE job_post_id={$job_post_id}";
-                $award_job=mysqli_query($connection,$query);
-                confirmQuery($award_job);
+//                $query="UPDATE job_post SET status='awarded' WHERE job_post_id={$job_post_id}";
+//                $award_job=mysqli_query($connection,$query);
+//                confirmQuery($award_job);
                 
-                $query="UPDATE jobs_applied SET status='awarded',job_progress='ongoing' WHERE job_post_id={$job_post_id} AND freelancer_id={$freelancer_id}";  
+                $query="UPDATE jobs_applied SET job_progress='completed' WHERE job_post_id={$job_post_id} AND freelancer_id={$freelancer_id}";  
                 $assign_freelancer=mysqli_query($connection,$query);
                 confirmQuery($assign_freelancer);    
                     
-                  echo "<script>alert('Job Awarded Successfully')</script>"; 
-                    
-                    header("location:shortlisted_candidates.php");
-                }elseif($status==='awarded'){
-                    echo "<script>alert('Job Awarded Already')</script>"; 
-                    header("location:shortlisted_candidates.php");
+                  echo "<script>alert('Job Completed Successfully')</script>"; 
+                    header("location:ongoing_jobs.php");
+                
                 }else{
                     
                 }

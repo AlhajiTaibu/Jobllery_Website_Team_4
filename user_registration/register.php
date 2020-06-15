@@ -14,7 +14,7 @@
 			 <span class="notice">ALREADY HAVE AN ACCOUNT?<a href="login.php"> LOGIN </a></span>
 		
 	</div>
-
+<br><br><br><br>
 
 <div class="login-wrap customscroll d-flex align-items-center flex-wrap justify-content-center pd-20">
 		<div class="login-box bg-white box-shadow pd-30 border-radius-5">
@@ -91,6 +91,7 @@
         
         
         ?>
+			
 			<h2 class="text-center mb-30">Register</h2>
 			<?php 
                                 // display message if the register button is pressed

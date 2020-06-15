@@ -94,7 +94,13 @@
 						<button onclick="myFunction()" class="dropbtn"><?php echo $first_name. " ". $last_name;?> &#9660</button>
 						<div id="myDropdown" class="dropdown-content">
 							<a href="../client/index.php"><i class="fas fa-user-alt"></i>Dashboard</a>
-							<a href="../client/edit_profile.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-cogs"></i>Edit Profile</a>
+							<a href="../client/edit_profile.php?p_id=<?php 
+                                     if(isset($_SESSION['user_id'])){
+                                      echo $_SESSION['user_id'];   
+                                     }else{
+                                         
+                                     }
+                                     ?>"><i class="fas fa-cogs"></i>Edit Profile</a>
 <!--							<a href="#"><i class="fas fa-list"></i>Activity Log</a>-->
 							<a href="../user_registration/logout.php"><i class="fas fa-sign-out-alt"></i>Log out</a>
 						</div>
@@ -131,10 +137,15 @@
 				  <span class="content"><?php echo $description;?> </span>
 				</div>
                 <?php
+                        if(isset($_SESSION['user_id'])){
                         $query="SELECT * FROM job_post WHERE client_id={$_SESSION['user_id']} ORDER BY createdAt DESC"; 
                         $select_job_by_client = mysqli_query($connection,$query);
                         confirmQuery($select_job_by_client);          
-                        $count = mysqli_num_rows($select_job_by_client);
+                        $count = mysqli_num_rows($select_job_by_client);   
+                        }else{
+                            
+                        }
+                       
                 
                 ?>
 				<div class="followers">

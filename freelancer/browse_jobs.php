@@ -9,10 +9,13 @@
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a><a class="nav-link" href="../profile_page/freelancer_profile_page.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-user"></i><strong>Profile</strong></a><a class="nav-link"
                             href="jobs_applied.php"><i class="fas fa-toolbox"></i><span><strong>Jobs Applied</strong></span></a><a class="nav-link" href="shortlisted_jobs.php"><i class="fas fa-clipboard-list"></i><span><strong>Awarded Jobs</strong></span></a>
+                             <a class="nav-link" href="job_progress.php"><i class="fas fa-clipboard-list"></i><span><strong>Job Progress</strong></span></a>
                         <a
-                            class="nav-link active" href="browse_jobs.php"><i class="fas fa-info"></i><span><strong>Browse Jobs</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Following Employers</strong></span></a>
+                            class="nav-link active" href="browse_jobs.php"><i class="fas fa-info"></i><span><strong>Browse Jobs</strong></span></a><a class="nav-link" href="messages.php"><i class="fas fa-envelope-open"></i><span><strong>Messages</strong></span></a><a class="nav-link" href="following_employers.php"><i class="fas fa-paper-plane"></i><span><strong>Clients</strong></span></a>
+<!--
                             <a
                                 class="nav-link" href="payments.php"><i class="fas fa-money-check-alt"></i><span><strong>Payments</strong><br></span></a>
+-->
                     </li>
                    
                 </ul>
@@ -74,7 +77,7 @@
 
     
                                       
-                                $query="SELECT * FROM job_post ORDER BY createdAt DESC LIMIT $page_no,5";
+                                $query="SELECT * FROM job_post WHERE status= 'open' ORDER BY createdAt DESC LIMIT $page_no,5";
                                 $select_all_jobs=mysqli_query($connection,$query);
                                 confirmQuery( $select_all_jobs);
 
@@ -178,6 +181,7 @@
                 echo "<span><a class='active_link' href='browse_jobs.php?page=$i'> $i </a></span>";
                 
                }else{
+                    
                 echo "<span><a href='browse_jobs.php?page=$i'>  $i</a></span>"; 
                 //echo "<li><a href='workspace.php?page=$i'><span uk-pagination-next></span></a></li>";
                }

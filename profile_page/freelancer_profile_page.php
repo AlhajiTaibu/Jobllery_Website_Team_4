@@ -92,19 +92,29 @@
 						<div id="myDropdown" class="dropdown-content">
 							<a href="#"><i class="fas fa-user-alt"></i>Profile</a>
 							<?php
-                            
-                            if($_SESSION['user_role']=='freelancer'){
+                            if(isset($_SESSION['user_role'])){
+                               if($_SESSION['user_role']=='freelancer'){
                              
                             ?>
                             <a href="../freelancer/index.php"><i class="fas fa-cogs"></i>Dashboard</a>
-                            <a href="../freelancer/edit_profile.php?p_id=<?php echo $_SESSION['user_id'];?>"><i class="fas fa-cogs"></i>Edit Profile</a>
+                            <a href="../freelancer/edit_profile.php?p_id=<?php 
+                                   if(isset($_SESSION['user_id'])){
+                                    echo $_SESSION['user_id'];   
+                                   }else{
+                                       
+                                   }
+                                   ?>"><i class="fas fa-cogs"></i>Edit Profile</a>
                             <a href="../user_registration/logout.php"><i class="fas fa-sign-out-alt"></i>Log out</a>
                             <?php
                             
                             }else{
                               ?>  
                                 <a href="../client/index.php"><i class="fas fa-cogs"></i>To Client Dashboard</a>
-                        <?php    }
+                        <?php    } 
+                            }else{
+                                
+                            }
+                            
                             
                             ?>
 <!--							<a href="#"><i class="fas fa-list"></i>Activity Log</a>-->
@@ -189,19 +199,126 @@
 		<!-- jobs completed section -->
 <div class="posts">
 	<h4 class="completed">Jobs Completed</h4>
+<!--
+	<?php
+//       
+//    if(isset($_GET['p_id'])){
+//            
+//        $freelancer_id=$_GET['p_id'];
+//            
+//            $query="SELECT * FROM jobs_applied WHERE freelancer_id={$freelancer_id} AND job_progress='completed'";
+//            $select_completed_jobs=mysqli_query($connection,$query);
+//            confirmQuery($select_completed_jobs);
+//            $count=mysqli_num_rows($select_completed_jobs);
+//            
+//           if($count>0){
+//                
+//                while($row=mysqli_fetch_assoc($select_completed_jobs)){
+//                $client_id=$row['client_id'];
+//                $job_post_id=$row['job_post_id']; 
+//               
+//                } 
+//                
+//                 $query="SELECT * FROM job_post WHERE job_post_id={$job_post_id} ORDER BY createdAt DESC";
+//                $select_job=mysqli_query($connection,$query);
+//                confirmQuery($select_job);
+//                
+//                while($row2=mysqli_fetch_assoc($select_job)){
+//                    
+//                        $job_post_id = $row['job_post_id'];
+//                        $client_id = $row['client_id'];
+//                        $category_id = $row['category_id'];
+//                        $job_title = $row['job_title'];
+//                        $contract_type = $row['contract_type'];
+//                        $job_description = $row['job_description'];
+//                        $application_deadline_date = $row['application_deadline_date'];
+//                        $required_skills =$row['required_skills'];
+//                        $min_salary = $row['min_salary'];
+//                        $max_salary = $row['max_salary'];
+//                        $salary_type = $row['salary_type'];
+//                        $tags = $row['tags'];
+//                        $offered_salary = $row['offered_salary'];
+//                        $job_duration = $row['job_duration'];
+//                        $experience = $row['experience'];
+//                        $image = $row['image'];
+//                        $location = $row['location'];
+//                        $createdAt = $row['createdAt'];
+                    ?>
+-->
+        
+          <div class="row">
+		<div class="column">
+			<img class="icon" src="images/icon.png">
+			<div class="job"><h3>Job: Logo Design</h3> <h4>Location: Tarkwa</h4> <h5>Less than a month</h5></div>
+			<div class="tags"> <h5>Requirement</h5>
+			 <div class="taglist">PhP, Java</div>  
+			 </div>
+			<div class="amount"><h3 class="price">$100</h3></div>
+		</div>
+                    
+                    
+<!--
+                    <?ph?
+//                }
+//               
+//            }else{
+//                        $job_post_id = " ";
+//                        $client_id = " ";
+//                        $category_id = " ";
+//                        $job_title = " ";
+//                        $contract_type = " ";
+//                        $job_description = " ";
+//                        $application_deadline_date = " ";
+//                        $required_skills =" ";
+//                        $min_salary = " ";
+//                        $max_salary = " ";
+//                        $salary_type = " ";
+//                        $tags = " ";
+//                        $offered_salary = " ";
+//                        $job_duration = " ";
+//                        $experience = " ";
+//                        $image = " ";
+//                        $location = " ";
+//                        $createdAt = " ";
+//            }
+
+            
+      //  ?>
+-->
+<!--
 	<div class="row">
 		<div class="column">
 			<img class="icon" src="images/icon.png">
-			<div class="job"><h3>Logo Design</h3> <h4>Accra, Ghana</h4> <h5>Estimated Time: 3 - 8 days</h5></div>
-			<div class="tags"> <h5>Requirement</h5> <div class="taglist">PhP</div> <div class="taglist">Angular</div> <div class="taglist">Perl</div> </div>
-			<div class="amount"><h3 class="price">$100</h3></div>
+			<div class="job"><h3><?php echo $job_title;?></h3> <h4><?php echo  $location; ?></h4> <h5><?php echo $job_duration; ?></h5></div>
+			<div class="tags"> <h5>Requirement</h5>
+			 <div class="taglist"><?php echo $tags; ?></div>  
+			 </div>
+			<div class="amount"><h3 class="price">$<?php echo $offered_salary; ?></h3></div>
 		</div>
+-->
+<!--
+		//<?php
+                
+            
+       // 
+            
+        //}else{
+        
+       // }
+    
+    
+    
+    
+    //?>
+-->
+<!--
 		<div class="column">
 			<img class="icon" src="images/icon.png">
 			<div class="job"><h3>Android Development</h3> <h4>Accra, Ghana</h4> <h5>Estimated Time: 1 - 2 months</h5></div>
 			<div class="tags"> <h5>Requirement</h5> <div class="taglist">PhP</div> <div class="taglist">Angular</div> <div class="taglist">Perl</div> </div>
 			<div class="amount"><h3 class="price">$4000</h3></div>
 		</div>
+-->
 	</div>
 </div>
 
