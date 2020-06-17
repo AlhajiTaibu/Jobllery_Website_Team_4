@@ -157,7 +157,29 @@
 
 				<div class="followers">
 				<h5>Link: </h5> <h6><a href="<?php echo $url ;?>"><?php echo $url ;?></a></h6> <br>
-				<h5>Jobs Completed</h5> <h6></h6>
+				<?php
+                 if(isset($_GET['p_id'])){
+            
+                $freelancer_id=$_GET['p_id'];
+            
+            $query="SELECT * FROM jobs_applied WHERE freelancer_id={$freelancer_id} AND job_progress='completed'";
+            $select_completed_jobs=mysqli_query($connection,$query);
+            confirmQuery($select_completed_jobs);
+            $count_completed_job=mysqli_num_rows($select_completed_jobs);    
+                
+                if($count_completed_job>0){
+                  echo "<h5>Jobs Completed:</h5> <h6>$count_completed_job</h6>";   
+                 }else{
+                    
+                    echo "<h5>Jobs Completed:</h5>0<h6></h6>";
+                }
+                 
+                 }else{
+                    echo "<h5>Jobs Completed:</h5><h6></h6>"; 
+                 }
+                ?>
+				
+				
 				</div>
 
 				
@@ -197,57 +219,69 @@
 
 
 		<!-- jobs completed section -->
+		
+		
+		
 <div class="posts">
 	<h4 class="completed">Jobs Completed</h4>
-<!--
-	<?php
-//       
-//    if(isset($_GET['p_id'])){
-//            
-//        $freelancer_id=$_GET['p_id'];
-//            
-//            $query="SELECT * FROM jobs_applied WHERE freelancer_id={$freelancer_id} AND job_progress='completed'";
-//            $select_completed_jobs=mysqli_query($connection,$query);
-//            confirmQuery($select_completed_jobs);
-//            $count=mysqli_num_rows($select_completed_jobs);
-//            
-//           if($count>0){
-//                
-//                while($row=mysqli_fetch_assoc($select_completed_jobs)){
-//                $client_id=$row['client_id'];
-//                $job_post_id=$row['job_post_id']; 
-//               
-//                } 
-//                
-//                 $query="SELECT * FROM job_post WHERE job_post_id={$job_post_id} ORDER BY createdAt DESC";
-//                $select_job=mysqli_query($connection,$query);
-//                confirmQuery($select_job);
-//                
-//                while($row2=mysqli_fetch_assoc($select_job)){
-//                    
-//                        $job_post_id = $row['job_post_id'];
-//                        $client_id = $row['client_id'];
-//                        $category_id = $row['category_id'];
-//                        $job_title = $row['job_title'];
-//                        $contract_type = $row['contract_type'];
-//                        $job_description = $row['job_description'];
-//                        $application_deadline_date = $row['application_deadline_date'];
-//                        $required_skills =$row['required_skills'];
-//                        $min_salary = $row['min_salary'];
-//                        $max_salary = $row['max_salary'];
-//                        $salary_type = $row['salary_type'];
-//                        $tags = $row['tags'];
-//                        $offered_salary = $row['offered_salary'];
-//                        $job_duration = $row['job_duration'];
-//                        $experience = $row['experience'];
-//                        $image = $row['image'];
-//                        $location = $row['location'];
-//                        $createdAt = $row['createdAt'];
-                    ?>
--->
+
         
           <div class="row">
+          
+          <?php
+                 if(isset($_GET['p_id'])){
+            
+                $freelancer_id=$_GET['p_id'];
+            
+            $query="SELECT * FROM jobs_applied WHERE freelancer_id={$freelancer_id} AND job_progress='completed'";
+            $select_completed_jobs=mysqli_query($connection,$query);
+            confirmQuery($select_completed_jobs);
+            $count_completed_job=mysqli_num_rows($select_completed_jobs);
+                
+            if($count_completed_job>0){
+                    
+                   while($row=mysqli_fetch_assoc($select_completed_jobs)){
+                       
+                        $job_post_id = $row['job_post_id'];
+                       
+                    $query="SELECT * FROM job_post WHERE job_post_id={$job_post_id}";
+                    $select_jobs=mysqli_query($connection,$query);
+                       while($row2=mysqli_fetch_assoc($select_jobs)){
+                           $job_title=$row2['job_title'];
+                           $location=$row2['location'];
+                           $duration=$row2['job_duration'];
+                           $tags=$row2['tags'];
+                           $offered_salary=$row2['offered_salary'];
+                           $image=$row2['image'];
+                           $job_post_id=$row2['job_post_id'];
+                           $client_id=$row2['client_id'];
+                   
+              ?>       
+                
 		<div class="column">
+		<img class="icon" src="../client/assets/img/dogs/<?php echo $image; ?>">
+			<a href="../job_details/job_details.php?p_id=<?php echo $job_post_id; ?>&client_id=<?php echo $client_id; ?>">
+			<div class="job"><h3>Job: <?php echo $job_title; ?></h3> <h4>Location:<?php echo $location; ?></h4> <h5><?php echo $duration; ?>
+			</h5>
+			</div>
+			</a>
+			<div class="tags"> <h5>Requirement</h5>
+			 <div class="taglist"><?php echo $tags; ?></div>  
+			 </div>
+			 <div class="amount"><h3 class="price">$<?php echo $offered_salary; ?></h3></div>
+		
+        </div>
+                  
+                   
+                    
+                     
+             
+           <?php  }
+                   }
+            }else{
+                   ?> 
+<!--
+        <div class="column">
 			<img class="icon" src="images/icon.png">
 			<div class="job"><h3>Job: Logo Design</h3> <h4>Location: Tarkwa</h4> <h5>Less than a month</h5></div>
 			<div class="tags"> <h5>Requirement</h5>
@@ -255,72 +289,31 @@
 			 </div>
 			<div class="amount"><h3 class="price">$100</h3></div>
 		</div>
+-->
                     
+            <?php    }
+                 
+                 
+                 }else{
+                     
+                 }
+                ?>        
+                   
+                   
+                   
+                   
                     
 <!--
-                    <?ph?
-//                }
-//               
-//            }else{
-//                        $job_post_id = " ";
-//                        $client_id = " ";
-//                        $category_id = " ";
-//                        $job_title = " ";
-//                        $contract_type = " ";
-//                        $job_description = " ";
-//                        $application_deadline_date = " ";
-//                        $required_skills =" ";
-//                        $min_salary = " ";
-//                        $max_salary = " ";
-//                        $salary_type = " ";
-//                        $tags = " ";
-//                        $offered_salary = " ";
-//                        $job_duration = " ";
-//                        $experience = " ";
-//                        $image = " ";
-//                        $location = " ";
-//                        $createdAt = " ";
-//            }
-
-            
-      //  ?>
--->
-<!--
-	<div class="row">
-		<div class="column">
-			<img class="icon" src="images/icon.png">
-			<div class="job"><h3><?php echo $job_title;?></h3> <h4><?php echo  $location; ?></h4> <h5><?php echo $job_duration; ?></h5></div>
-			<div class="tags"> <h5>Requirement</h5>
-			 <div class="taglist"><?php echo $tags; ?></div>  
-			 </div>
-			<div class="amount"><h3 class="price">$<?php echo $offered_salary; ?></h3></div>
-		</div>
--->
-<!--
-		//<?php
-                
-            
-       // 
-            
-        //}else{
-        
-       // }
-    
-    
-    
-    
-    //?>
--->
-<!--
+                    
 		<div class="column">
 			<img class="icon" src="images/icon.png">
 			<div class="job"><h3>Android Development</h3> <h4>Accra, Ghana</h4> <h5>Estimated Time: 1 - 2 months</h5></div>
 			<div class="tags"> <h5>Requirement</h5> <div class="taglist">PhP</div> <div class="taglist">Angular</div> <div class="taglist">Perl</div> </div>
 			<div class="amount"><h3 class="price">$4000</h3></div>
 		</div>
--->
 	</div>
 </div>
+-->
 
 		<!-- jobs completed section ends-->
 
